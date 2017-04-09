@@ -1,20 +1,17 @@
 {
     "compilerOptions": {
         "target": "es5",
+        "allowJs": false,
+        "experimentalDecorators": true,
+        "emitDecoratorMetadata": true,
         "module": "commonjs",
         "moduleResolution": "node",
+        "pretty": true,
         "sourceMap": true,
-        "emitDecoratorMetadata": true,
-        "experimentalDecorators": true,
-        "lib": [
-            "es2015",
-            "dom"
-        ],
-        "noImplicitAny": false,
-        "suppressImplicitAnyIndexErrors": true
+        "watch": true
     },
     "exclude": [
-        "node_modules", //<-- this would be needed in case of VS2015
-        "node_modules/@typings"
+        "./node_modules",
+        "./vendor"
     ]
 }
