@@ -1,0 +1,5 @@
+{
+    "vsicons.presets.angular": true,
+    "workbench.editor.enablePreview": true,
+    "css.colorDecorators.enable": true
+}

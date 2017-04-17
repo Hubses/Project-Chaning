@@ -1,0 +1,7 @@
+.sidebar-item{
+    display: flex;
+
+}
+.sidebar-item__numbers{
+    margin-left: auto;
+}
