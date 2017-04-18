@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { MdDialog } from '@angular/material';
+import { DialogNameComponent } from "../dialog-name/dialog-name.component";
+import { ProjectService } from "../services/project.service";
 
 @Component({
   selector: 'app-main',
@@ -7,9 +10,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MainComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    public dialog: MdDialog
+  ) {
+
+  }
 
   ngOnInit() {
   }
 
+  public openDialog() {
+    let dialogRef = this.dialog.open(DialogNameComponent);
+  }
 }

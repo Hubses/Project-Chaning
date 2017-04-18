@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MdDialogRef } from '@angular/material';
-import { ChainingService } from "../services/chaining.service";
+import { ProjectService, UserService } from "../services";
+import { Project } from "../model/project.model";
 
 @Component({
   selector: 'app-dialog-name',
@@ -11,7 +12,8 @@ export class DialogNameComponent implements OnInit {
   public projectName: string;
   constructor(
     public dialogRef: MdDialogRef<DialogNameComponent>,
-    private chaining: ChainingService
+    private projectService: ProjectService,
+    private userService: UserService
   ) {
   }
 
@@ -19,14 +21,13 @@ export class DialogNameComponent implements OnInit {
   }
 
   public createProject(projectName: string) {
-    if (projectName === '') {
-      
-    }
-    else {
+    let project = new Project();
+    if (projectName !== '') {
       console.log('done ', projectName);
-      this.chaining.projectName = projectName;
+      project.ProjectName = this.projectService.AddProjectName(projectName);
+      this.userService.addProject(project);
+
       this.dialogRef.close();
     }
-
   }
 }

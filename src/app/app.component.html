@@ -1,20 +1,13 @@
 <app-topbar></app-topbar>
-
 <md-sidenav-container class="example-container">
   <md-sidenav #sidenav mode="side" opened="true">
-    <md-list>
-      <md-list-item> Pepper </md-list-item>
-      <md-list-item> Salt </md-list-item>
-      <md-list-item> Paprika </md-list-item>
-      <md-list-item> Pepper </md-list-item>
-      <md-list-item> Salt </md-list-item>
-      <md-list-item> Paprika </md-list-item>
-      <md-list-item> Pepper </md-list-item>
-      <md-list-item> Salt </md-list-item>
-      <md-list-item> Paprika </md-list-item>
+    <md-list class="list">
+      <md-list-item class="list-header"> Projects </md-list-item>
+      <md-list-item *ngFor="let item of getProjectNames()">
+        <button md-button class="list-item__button">{{item}}</button>
+      </md-list-item>
     </md-list>
   </md-sidenav>
-
 
   <app-main></app-main>
   <app-footer></app-footer>

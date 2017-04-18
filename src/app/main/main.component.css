@@ -1,1 +1,8 @@
-
+.main{
+    height: 100%;
+}
+a.main-button-add-btn{
+  position: fixed;
+  bottom: 70px;
+  right: 30px;
+}

@@ -8,15 +8,13 @@ import { DialogNameComponent } from "../dialog-name/dialog-name.component";
   styleUrls: ['./tabs.component.css']
 })
 export class TabsComponent implements OnInit {
-  selectedOption: string;
-  constructor(public dialog: MdDialog) {
-    this.openDialog();
+  
+  constructor() {
+     
   }
 
   ngOnInit() {
   }
 
-  public openDialog() {
-    let dialogRef = this.dialog.open(DialogNameComponent);
-  }
+ 
 }

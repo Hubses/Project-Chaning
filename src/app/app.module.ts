@@ -14,9 +14,15 @@ import { FooterComponent } from './footer/footer.component';
 import { SidebarItemComponent } from './sidebar/sidebar-item/sidebar-item.component';
 import { TabsComponent } from './tabs/tabs.component';
 import { TabItem1Component } from './tabs/tab-item1/tab-item1.component';
+import { TabItem2Component } from './tabs/tab-item2/tab-item2.component';
 import { DialogNameComponent } from './dialog-name/dialog-name.component';
 
-import { ChainingService } from "./services/chaining.service";
+import {
+  ProjectService,
+  UserService
+} from "./services";
+import { TabItem3Component } from './tabs/tab-item3/tab-item3.component';
+
 
 @NgModule({
 
@@ -29,7 +35,9 @@ import { ChainingService } from "./services/chaining.service";
     SidebarItemComponent,
     TabsComponent,
     TabItem1Component,
-    DialogNameComponent
+    DialogNameComponent,
+    TabItem2Component,
+    TabItem3Component
   ],
   imports: [
     BrowserModule,
@@ -41,8 +49,9 @@ import { ChainingService } from "./services/chaining.service";
   ],
   entryComponents: [DialogNameComponent],
   providers: [
-    ChainingService
-    ],
+    ProjectService,
+    UserService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
