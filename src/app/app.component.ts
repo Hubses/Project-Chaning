@@ -14,7 +14,9 @@ export class AppComponent {
   }
   public getProjectNames(): string[] {
     // console.log(this.userService.getProjectNames());
-    return this.userService.getProjectNames();
+    // return this.userService.getProjectNames();
+    // return [];
+    return this.userService.projectNames;
   }
   title = 'app works!';
 }

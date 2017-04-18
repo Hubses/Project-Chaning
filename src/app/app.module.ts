@@ -3,53 +3,53 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { RouterModule, Routes } from '@angular/router';
 
 import { MaterialModule } from "@angular/material";
 
 import { AppComponent } from './app.component';
-import { SidebarComponent } from './sidebar/sidebar.component';
-import { TopbarComponent } from './topbar/topbar.component';
-import { MainComponent } from './main/main.component';
-import { FooterComponent } from './footer/footer.component';
-import { SidebarItemComponent } from './sidebar/sidebar-item/sidebar-item.component';
-import { TabsComponent } from './tabs/tabs.component';
-import { TabItem1Component } from './tabs/tab-item1/tab-item1.component';
-import { TabItem2Component } from './tabs/tab-item2/tab-item2.component';
-import { DialogNameComponent } from './dialog-name/dialog-name.component';
 
 import {
-  ProjectService,
+  FooterComponent,
+  NotFoundComponent,
+  TopbarComponent,
+  DialogProjectCreatorComponent,
+  DialogUserNameEditComponent
+} from "./components";
+
+import { MainComponent } from "./container";
+
+import {
   UserService
 } from "./services";
-import { TabItem3Component } from './tabs/tab-item3/tab-item3.component';
+
+const routes: Routes = [
+  { path: '', component: MainComponent },
+  { path: '**', component: NotFoundComponent }
+];
 
 
 @NgModule({
 
   declarations: [
     AppComponent,
-    SidebarComponent,
     TopbarComponent,
     MainComponent,
     FooterComponent,
-    SidebarItemComponent,
-    TabsComponent,
-    TabItem1Component,
-    DialogNameComponent,
-    TabItem2Component,
-    TabItem3Component
+    DialogProjectCreatorComponent,
+    NotFoundComponent,
+    DialogUserNameEditComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
     BrowserAnimationsModule,
-
+    RouterModule.forRoot(routes),
     MaterialModule
   ],
-  entryComponents: [DialogNameComponent],
+  entryComponents: [DialogProjectCreatorComponent, DialogUserNameEditComponent],
   providers: [
-    ProjectService,
     UserService
   ],
   bootstrap: [AppComponent]

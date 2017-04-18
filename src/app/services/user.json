@@ -1,0 +1,15 @@
+{
+    "userName": "User1",
+    "Projects": [
+        {
+            "projectName": "12345",
+            "frameWork": "angular",
+            "options": []
+        },
+        {
+            "projectName": "123",
+            "frameWork": "angular",
+            "options": []
+        }
+    ]
+}

@@ -36,7 +36,7 @@ export class User {
 
     public static ToJson(user: User): entities.IUser {
         return {
-            name: user.name,
+            userName: user.name,
             projects: user.projects.map(project => {
                 return {
                     projectName: project.projectName,
@@ -48,8 +48,8 @@ export class User {
     }
     public static FromJson(json: entities.IUser): User {
         let user: User;
-        if (json.name !== '') {
-            user = new User(json.name);
+        if (json.userName !== '') {
+            user = new User(json.userName);
         }
         else {
             user = new User();

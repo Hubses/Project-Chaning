@@ -5,7 +5,7 @@ declare namespace entities {
         options: string[];
     }
     export interface IUser {
-        name: string;
+        userName: string;
         projects: IProject[];
     }
 }
