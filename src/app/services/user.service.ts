@@ -1,37 +1,3 @@
-// import { Injectable } from '@angular/core';
-// import { User } from "../model/user.model";
-// import { Project } from "../model/project.model";
-// import { ProjectService } from "./project.service";
-
-// @Injectable()
-// export class UserService {
-//   private user: User;
-//   private project;
-//   constructor(
-
-//   ) {
-
-//     this.user = new User();
-//   }
-
-//   public set User(user: User) {
-//     this.user = user;
-//   }
-//   public get User(): User {
-//     return this.user;
-//   }
-
-//   public addProject(project) {
-//     this.user.Project = project;
-//   }
-
-//   public getProjectNames(): string[] {
-//     return this.user.Projects.map(proj => {
-//       return proj.projectName;
-//     })
-//   }
-
-// }
 import { Injectable } from '@angular/core';
 
 let user: entities.IUser = {
@@ -53,7 +19,16 @@ let user: entities.IUser = {
 
 @Injectable()
 export class UserService {
-  constructor() { }
+  public projects: entities.IProject[] = [];
+  public emptyProject: entities.IProject;
+  constructor() {
+    this.emptyProject = {
+      "projectName": "",
+      "framework": "",
+      "options": []
+    }
+    this.projects = user.projects;
+  }
 
   public get Model(): entities.IUser {
     return user;
@@ -70,18 +45,24 @@ export class UserService {
       return projects.projectName;
     })
   }
-
-
-  public get projects() {
-    return user.projects;
+  public getProject(projectName: string): entities.IProject[] {
+    return user.projects.filter(project => project.projectName == projectName)
   }
-  public set project(value: entities.IProject | undefined | null) {
-    if (value === undefined || value === null) {
-      value.projectName = 'test';
-      value.framework = 'angular v4';
-      value.options = [];
-    }
-    user.projects.push(value);
-
+  public setProjectByName(projectName: string) {
+    this.emptyProject.projectName = projectName;
+    this.emptyProject.framework = '';
+    this.emptyProject.options = [];
+    user.projects.push(this.emptyProject);
   }
+
+
+  // public set project(value: entities.IProject | undefined | null) {
+  //   if (value === undefined || value === null) {
+  //     value.projectName = 'test';
+  //     value.framework = 'angular v4';
+  //     value.options = [];
+  //   }
+  //   user.projects.push(value);
+
+  // }
 }

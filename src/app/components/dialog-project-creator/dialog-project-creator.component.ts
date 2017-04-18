@@ -23,7 +23,7 @@ export class DialogProjectCreatorComponent implements OnInit {
   public createProject(projectName: string) {
     if (projectName !== '') {
       console.log('done ', projectName);
-      this.userService.projectNames.push(projectName);
+      this.userService.setProjectByName(projectName);
       this.dialogRef.close();
     }
   }
