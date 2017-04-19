@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 
 const user: entities.IUser = {
-  'userName': 'User1'
+  'name': 'User1'
 };
 
 

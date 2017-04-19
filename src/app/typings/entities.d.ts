@@ -5,6 +5,6 @@ declare namespace entities {
         options: string[];
     }
     interface IUser {
-        userName: string;
+        name: string;
     }
 }

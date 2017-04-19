@@ -9,15 +9,21 @@ import { UserService } from '../../services/user.service';
   styleUrls: ['./topbar.component.css']
 })
 export class TopbarComponent implements OnInit {
-  constructor(
+
+  public name: string;
+
+  public constructor(
     private userService: UserService,
     public dialog: MdDialog
   ) { }
 
   ngOnInit() {
+    this.userService.getUser().subscribe(user => this.name = user.name);
   }
+
+
   public openDialog() {
-    let dialogRef = this.dialog.open(DialogUserNameEditComponent);
+    const dialogRef = this.dialog.open(DialogUserNameEditComponent);
   }
-  
+
 }
