@@ -1,6 +1,7 @@
 declare namespace entities {
     export interface IProject {
         projectName: string;
+        isCurrentProject: boolean;
         framework: string;
         options: string[];
     }

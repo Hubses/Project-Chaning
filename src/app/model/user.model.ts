@@ -1,7 +1,7 @@
 import { Project } from "./project.model";
 
 export class User {
-    private projects: entities.IProject[] = [];
+    private projects: any;
     constructor(
         private name?: string
     ) {
@@ -11,11 +11,13 @@ export class User {
 
         this.projects = [{
             projectName: '13',
+            isCurrentProject: false,
             framework: 'angular',
             options: ['123', '145']
         },
         {
             projectName: '13',
+            isCurrentProject: false,
             framework: 'angular',
             options: ['123', '145']
         }]
@@ -34,18 +36,18 @@ export class User {
         return this.projects;
     }
 
-    public static ToJson(user: User): entities.IUser {
-        return {
-            userName: user.name,
-            projects: user.projects.map(project => {
-                return {
-                    projectName: project.projectName,
-                    framework: project.framework,
-                    options: project.options
-                }
-            })
-        }
-    }
+    // public static ToJson(user: User): any {
+    //     return {
+    //         userName: user.name,
+    //         projects: user.projects.map(project => {
+    //             return {
+    //                 projectName: project.projectName,
+    //                 framework: project.framework,
+    //                 options: project.options
+    //             }
+    //         })
+    //     }
+    // }
     public static FromJson(json: entities.IUser): User {
         let user: User;
         if (json.userName !== '') {

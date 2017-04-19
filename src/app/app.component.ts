@@ -7,16 +7,20 @@ import { UserService } from "./services";
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+  public selectedProject: entities.IProject;
   constructor(
     private userService: UserService
   ) {
 
   }
   public getProjectNames(): string[] {
-    // console.log(this.userService.getProjectNames());
-    // return this.userService.getProjectNames();
-    // return [];
     return this.userService.projectNames;
+  }
+
+  public getProjectInfo(event: MouseEvent, projectName: string) {
+    console.log(this.userService.getProject(projectName));
+    this.selectedProject = this.userService.getProject(projectName);
+    return this.selectedProject;
   }
   title = 'app works!';
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MdDialog } from '@angular/material';
 import { DialogProjectCreatorComponent } from "../../components";
+import { UserService } from "../../services/";
 
 @Component({
   selector: 'app-main',
@@ -8,11 +9,13 @@ import { DialogProjectCreatorComponent } from "../../components";
   styleUrls: ['./main.component.css']
 })
 export class MainComponent implements OnInit {
+  public user: entities.IUser;
 
   constructor(
-    public dialog: MdDialog
+    public dialog: MdDialog,
+    private userService: UserService
   ) {
-
+    this.user = this.userService.Model;
   }
 
   ngOnInit() {

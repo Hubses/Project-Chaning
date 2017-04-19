@@ -5,11 +5,13 @@ let user: entities.IUser = {
   "projects": [
     {
       "projectName": "12345",
+      "isCurrentProject": true,
       "framework": "angular",
       "options": []
     },
     {
       "projectName": "123",
+      "isCurrentProject": false,
       "framework": "angular2",
       "options": []
     }
@@ -21,9 +23,11 @@ let user: entities.IUser = {
 export class UserService {
   public projects: entities.IProject[] = [];
   public emptyProject: entities.IProject;
+  private currentProj: entities.IProject;
   constructor() {
     this.emptyProject = {
       "projectName": "",
+      "isCurrentProject": false,
       "framework": "",
       "options": []
     }
@@ -45,24 +49,27 @@ export class UserService {
       return projects.projectName;
     })
   }
-  public getProject(projectName: string): entities.IProject[] {
-    return user.projects.filter(project => project.projectName == projectName)
+
+  public get currentProject() {
+    return user.projects.find(project => project.isCurrentProject == true);
+  }
+
+  public changeCurrentProject(projectName: string) {
+    let currentProjectName: string;
+    let currentProject = user.projects.find(project => project.isCurrentProject == true);
+
+  }
+
+  public getProject(projectName: string): entities.IProject {
+    let projects = user.projects.find(project => project.projectName == projectName);
+
+    return projects;
   }
   public setProjectByName(projectName: string) {
     this.emptyProject.projectName = projectName;
+    this.emptyProject.isCurrentProject = false;
     this.emptyProject.framework = '';
     this.emptyProject.options = [];
     user.projects.push(this.emptyProject);
   }
-
-
-  // public set project(value: entities.IProject | undefined | null) {
-  //   if (value === undefined || value === null) {
-  //     value.projectName = 'test';
-  //     value.framework = 'angular v4';
-  //     value.options = [];
-  //   }
-  //   user.projects.push(value);
-
-  // }
 }

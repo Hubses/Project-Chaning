@@ -1,5 +1,6 @@
 export class Project {
     private projectName: string;
+    private isCurrentProject: boolean;
     private framework: string;
     private options: string[] = [];
     constructor() {
@@ -14,6 +15,7 @@ export class Project {
     public static ToJson(project: Project): entities.IProject {
         return {
             projectName: project.projectName,
+            isCurrentProject: project.isCurrentProject,
             framework: project.framework,
             options: project.options
         }
