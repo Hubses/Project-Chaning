@@ -1,12 +1,10 @@
 declare namespace entities {
-    export interface IProject {
-        projectName: string;
-        isCurrentProject: boolean;
+    interface IProject {
+        name: string;
         framework: string;
         options: string[];
     }
-    export interface IUser {
+    interface IUser {
         userName: string;
-        projects: IProject[];
     }
 }

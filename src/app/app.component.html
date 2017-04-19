@@ -3,15 +3,20 @@
   <md-sidenav #sidenav mode="side" opened="true">
     <md-list class="list">
       <md-list-item class="list-header"> Projects </md-list-item>
-      <md-list-item *ngFor="let item of getProjectNames()">
-        <button md-button class="list-item__button" (click)="getProjectInfo($event, item)">{{item}}</button>
+      <md-list-item *ngFor="let project of projects">
+        <button md-button class="list-item__button">{{project.name}}</button>
       </md-list-item>
     </md-list>
   </md-sidenav>
 
-  <app-main>
-    <router-outlet></router-outlet>
-  </app-main>
+  <app-create-project-button [projects]="projects" (onProjectNameCreated)="createProject($event)"></app-create-project-button>
+
+  <router-outlet></router-outlet>
+
+
+  <!--<app-main [projects]="projects">
+    
+  </app-main>-->
 
   <app-footer></app-footer>
 

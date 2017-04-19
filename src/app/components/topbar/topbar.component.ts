@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MdDialog } from '@angular/material';
-import { DialogUserNameEditComponent } from "../dialog-user-name-edit/dialog-user-name-edit.component";
-import { UserService } from "../../services/user.service";
+import { DialogUserNameEditComponent } from '../dialog-user-name-edit/dialog-user-name-edit.component';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-topbar',
@@ -19,7 +19,5 @@ export class TopbarComponent implements OnInit {
   public openDialog() {
     let dialogRef = this.dialog.open(DialogUserNameEditComponent);
   }
-  public get userName() {
-    return this.userService.userName;
-  }
+  
 }

@@ -1,1 +1,1 @@
-export { MainComponent } from './main/main.component'
+export { ProjectDetailComponent } from './project-detail/project-detail.component'

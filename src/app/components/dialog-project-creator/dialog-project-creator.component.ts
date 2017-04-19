@@ -1,7 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { MdDialogRef } from '@angular/material';
-
-import { UserService } from "../../services";
 
 
 @Component({
@@ -9,22 +7,17 @@ import { UserService } from "../../services";
   templateUrl: './dialog-project-creator.component.html',
   styleUrls: ['./dialog-project-creator.component.css']
 })
-export class DialogProjectCreatorComponent implements OnInit {
+export class DialogProjectCreatorComponent {
+
   public projectName: string;
-  constructor(
+  public projectsNames: string[];
+
+  public constructor(
     public dialogRef: MdDialogRef<DialogProjectCreatorComponent>,
-    private userService: UserService
-  ) {
-  }
+  ) { }
 
-  ngOnInit() {
-  }
-
-  public createProject(projectName: string) {
-    if (projectName !== '') {
-      console.log('done ', projectName);
-      this.userService.setProjectByName(projectName);
-      this.dialogRef.close();
-    }
+  public createProject(projectName: string): void {
+    this.projectName = projectName;
+    this.dialogRef.close();
   }
 }

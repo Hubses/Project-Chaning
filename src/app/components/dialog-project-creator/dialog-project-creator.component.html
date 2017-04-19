@@ -1,14 +1,5 @@
-<!--<md-dialog-container>
-  <md-dialog-title>Title</md-dialog-title>
- <h1 md-dialog-title="" class="mat-dialog-title">Dialog</h1>
-  <md-dialog-content>What would you like to do?</md-dialog-content>
-  <div md-dialog-content="" class="mat-dialog-content"></div>
-  <md-dialog-actions>
-    <md-button>Button1</md-button>
-  </md-dialog-actions>
-</md-dialog-container>-->
 <div class="title">Dialog Title</div>
 <md-input-container>
-  <input #projectName mdInput placeholder="Write project name">
+  <input #projectName mdInput placeholder="Write project name" required>
 </md-input-container>
 <button md-raised-button type="" (click)="createProject(projectName.value)">Create</button>

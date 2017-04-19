@@ -18,16 +18,16 @@ export class DialogUserNameEditComponent implements OnInit {
   ngOnInit() {
   }
 
-  public editUserName(value: string) {
-    if (this.userService.userName === value) {
-      alert('err');
-    }
-    else {
-      this.userService.userName = value;
-      console.log(this.userService.userName);
-      this.dialogRef.close();
+  // public editUserName(value: string) {
+  //   if (this.userService.userName === value) {
+  //     alert('err');
+  //   }
+  //   else {
+  //     this.userService.userName = value;
+  //     console.log(this.userService.userName);
+  //     this.dialogRef.close();
 
-    }
-  }
+  //   }
+  // }
 
 }

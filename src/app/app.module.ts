@@ -5,7 +5,7 @@ import { HttpModule } from '@angular/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule, Routes } from '@angular/router';
 
-import { MaterialModule } from "@angular/material";
+import { MaterialModule } from '@angular/material';
 
 import { AppComponent } from './app.component';
 
@@ -14,17 +14,19 @@ import {
   NotFoundComponent,
   TopbarComponent,
   DialogProjectCreatorComponent,
-  DialogUserNameEditComponent
-} from "./components";
+  DialogUserNameEditComponent,
+  CreateProjectButtonComponent
+} from './components';
 
-import { MainComponent } from "./container";
+import { ProjectDetailComponent } from './container';
 
 import {
-  UserService
-} from "./services";
+  UserService,
+  ProjectService
+} from './services';
 
 const routes: Routes = [
-  { path: '', component: MainComponent },
+  { path: '', component: ProjectDetailComponent },
   { path: '**', component: NotFoundComponent }
 ];
 
@@ -34,11 +36,12 @@ const routes: Routes = [
   declarations: [
     AppComponent,
     TopbarComponent,
-    MainComponent,
+    CreateProjectButtonComponent,
     FooterComponent,
     DialogProjectCreatorComponent,
     NotFoundComponent,
-    DialogUserNameEditComponent
+    DialogUserNameEditComponent,
+    ProjectDetailComponent
   ],
   imports: [
     BrowserModule,
@@ -50,7 +53,8 @@ const routes: Routes = [
   ],
   entryComponents: [DialogProjectCreatorComponent, DialogUserNameEditComponent],
   providers: [
-    UserService
+    UserService,
+    ProjectService
   ],
   bootstrap: [AppComponent]
 })

@@ -1,26 +1,27 @@
-import { Component } from '@angular/core';
-import { UserService } from "./services";
+import { Component, OnInit } from '@angular/core';
+import { UserService, ProjectService } from './services';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
-  public selectedProject: entities.IProject;
-  constructor(
-    private userService: UserService
-  ) {
+export class AppComponent implements OnInit {
 
-  }
-  public getProjectNames(): string[] {
-    return this.userService.projectNames;
+  public user: entities.IUser;
+  public projects: entities.IProject[];
+
+  public constructor(
+    private userService: UserService,
+    private projectService: ProjectService
+  ) { }
+
+  public ngOnInit(): void {
+    this.userService.getUser().subscribe(user => this.user = user);
+    this.projectService.getProjects(this.user.userName).subscribe(projects => this.projects = projects);
   }
 
-  public getProjectInfo(event: MouseEvent, projectName: string) {
-    console.log(this.userService.getProject(projectName));
-    this.selectedProject = this.userService.getProject(projectName);
-    return this.selectedProject;
+  public createProject(projectName: string): void {
+    this.projectService.createProject(projectName);
   }
-  title = 'app works!';
 }
