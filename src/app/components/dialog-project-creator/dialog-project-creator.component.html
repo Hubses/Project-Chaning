@@ -1,5 +1,9 @@
 <div class="title">Dialog Title</div>
 <md-input-container>
-  <input #projectName mdInput placeholder="Write project name" required>
+  <input [(ngModel)]='projectName' #ctrl='ngModel' mdInput minlength="1" placeholder="Write project name" required mdType="date">
+  <md-error>
+    <span *ngIf="!ctrl.empty">Empty</span>
+    <span *ngIf="ctrl.empty"> Not a Empty lol</span>
+  </md-error>
 </md-input-container>
-<button md-raised-button type="" (click)="createProject(projectName.value)">Create</button>
+<button md-raised-button (click)="createProject(projectName)">Create</button>

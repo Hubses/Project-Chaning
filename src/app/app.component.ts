@@ -24,4 +24,8 @@ export class AppComponent implements OnInit {
   public createProject(projectName: string): void {
     this.projectService.createProject(projectName);
   }
+
+  public validate(data: any) {
+    return true;
+  }
 }
