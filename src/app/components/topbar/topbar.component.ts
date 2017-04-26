@@ -21,6 +21,9 @@ export class TopbarComponent implements OnInit {
     this.userService.getUser().subscribe(user => this.name = user.name);
   }
 
+  public get user(): any {
+    return this.name;
+  }
 
   public openDialog() {
     const dialogRef = this.dialog.open(DialogUserNameEditComponent);

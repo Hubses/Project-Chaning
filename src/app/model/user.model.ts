@@ -1,24 +1,31 @@
 import { Observable } from 'rxjs/Observable';
-import { AbstractUser } from './user.abstract.model';
+import { ExtendedString } from '../classes/extendedString';
+// import { AbstractUser } from './user.abstract.model';
 
-export class User implements AbstractUser {
-    public toJson(user: entities.IUser) {
+export class User {
+
+    public static toJson(user: User): entities.IUser {
         return {
             name: user.name
         };
     }
-    public fromJson() {
-        throw new Error('Method not implemented.');
-    }
-    public toObservable(user: User): Observable<entities.IUser> {
-        const json = user.toJson(user);
-        return Observable.of(json);
+
+    public static fromJson(json: entities.IUser): User {
+        const user = new User();
+        user._name = json.name;
+        return user;
     }
 
+    public static toObservable(user: User): Observable<entities.IUser> {
+        return Observable.of(user);
+    }
 
     public constructor(
-        private _name: string
+        private _name?: string
     ) {
+        if (ExtendedString.isNullorWhiteSpace(_name)) {
+            _name = 'User1';
+        }
     }
 
     public get name(): string {

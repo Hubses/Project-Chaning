@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output } from '@angular/core';
 import { UserService, ProjectService } from './services';
 
 @Component({
@@ -11,6 +11,8 @@ export class AppComponent implements OnInit {
   public user: entities.IUser;
   public projects: entities.IProject[];
 
+  public currentProject: entities.IProject;
+
   public constructor(
     private userService: UserService,
     private projectService: ProjectService
@@ -21,11 +23,8 @@ export class AppComponent implements OnInit {
     this.projectService.getProjects(this.user.name).subscribe(projects => this.projects = projects);
   }
 
-  public createProject(projectName: string): void {
-    this.projectService.createProject(projectName);
-  }
-
-  public validate(data: any) {
-    return true;
+  public setCurrentProject(projectName: string): entities.IProject {
+    this.currentProject = this.projectService.setCurrentProject(projectName);
+    return this.currentProject;
   }
 }

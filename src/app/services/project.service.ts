@@ -1,42 +1,49 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 
-const projects: entities.IProject[] = [
-  {
-    'name': '12345',
-    'framework': 'angular',
-    'options': []
-  },
-  {
-    'name': '123',
-    'framework': 'angular2',
-    'options': []
-  }
-];
-
+import { Project } from '../model/project.model';
 
 @Injectable()
 export class ProjectService {
 
-  constructor() { }
+  private _currentProject: entities.IProject;
+  private projects: entities.IProject[] = [];
 
-  public getProjects(userName: string): Observable<entities.IProject[]> {
-    return Observable.of(projects);
+  public constructor() {
+    this.mock();
   }
 
-  public changeCurrentProject(userName: string, projectName: string): void {
-    // need implemets
+  public getProjects(userName?: string): Observable<entities.IProject[]> {
+    return Observable.of(this.projects);
   }
 
   public createProject(name: string): void {
-    const newProject: entities.IProject = {
-      name,
-      'framework': 'angular',
-      'options': []
-    };
+    const project = new Project(name);
+    this.projects.push(project);
+  }
 
-    projects.push(newProject);
+  public getNames(): string[] {
+    return this.projects.map(project => {
+      return project.name;
+    });
+  }
 
-    Observable.of(newProject);
+  public setCurrentProject(projectName: string): entities.IProject {
+    this._currentProject = this.projects.find(project => project.name === projectName);
+    return this._currentProject;
+  }
+
+  public get currentProject() {
+    if (this._currentProject === null || this._currentProject === undefined) {
+      this._currentProject = this.projects[0];
+    }
+    return this._currentProject;
+  }
+
+  public mock(): void {
+    const project1 = new Project('123');
+    const project2 = new Project('1234');
+    const project3 = new Project('12345');
+    this.projects.push(project1, project2, project3);
   }
 }

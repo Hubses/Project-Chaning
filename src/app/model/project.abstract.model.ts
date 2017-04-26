@@ -1,8 +1,7 @@
 export abstract class AbstractProject {
 
-    public static toJson() { }
+    public static toJson(abstractProject: entities.IProject) { }
     public static fromJson() { }
-    public static toObservable() { }
 
     public constructor() { }
 }

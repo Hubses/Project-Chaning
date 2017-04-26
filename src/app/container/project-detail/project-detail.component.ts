@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter } from '@angular/core';
+
+import { ProjectService } from '../../services';
 
 @Component({
   selector: 'app-project-detail',
@@ -7,9 +9,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProjectDetailComponent implements OnInit {
 
-  constructor() { }
+  public currentProject;
+
+  constructor(
+    private projectService: ProjectService
+  ) {
+  }
 
   ngOnInit() {
+  }
+
+  public getFramework(): string {
+    return this.projectService.currentProject.framework;
+  }
+
+  public getCurrentName(): string {
+    return this.projectService.currentProject.name;
   }
 
 }

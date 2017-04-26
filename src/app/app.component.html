@@ -4,12 +4,12 @@
     <md-list class="list">
       <md-list-item class="list-header"> Projects </md-list-item>
       <md-list-item *ngFor="let project of projects">
-        <button md-button class="list-item__button">{{project.name}}</button>
+        <button md-button (click)="setCurrentProject(project.name)"  class="list-item__button">{{project.name}}</button>
       </md-list-item>
     </md-list>
   </md-sidenav>
 
-  <app-create-project-button [projects]="projects" (onProjectNameCreated)="createProject($event)"></app-create-project-button>
+  <app-create-project-button [projects]="projects"></app-create-project-button>
 
   <router-outlet></router-outlet>
 

@@ -2,6 +2,7 @@ import { Component, Input, Output } from '@angular/core';
 import { MdDialogRef } from '@angular/material';
 import { Observable } from 'rxjs/Observable';
 
+import { ProjectService } from '../../services/project.service';
 
 @Component({
   selector: 'app-dialog-project-creator',
@@ -12,36 +13,29 @@ export class DialogProjectCreatorComponent {
 
   public projectName: string;
   public projectsNames: string[];
-  private _model: entities.IModel = {
-    projectName: this.projectName,
-    isValid: false
-  };
+
 
   public constructor(
     public dialogRef: MdDialogRef<DialogProjectCreatorComponent>,
+    private projectService: ProjectService
   ) {
     console.log('test');
+    this.projectsNames = this.projectService.getNames();
   }
 
-
-  public get model(): Observable<entities.IModel> {
-    return Observable.of(this._model);
-  }
 
   public get valid(): boolean {
     if (this.projectsNames.includes(this.projectName)) {
-      this._model.isValid = false;
       return false;
     } else {
-      this._model.isValid = true;
       return true;
     }
   }
 
   public createProject(projectName: string): void {
-    this.projectName = projectName;
 
     if (this.valid) {
+      this.projectService.createProject(projectName);
       console.log('valid');
       this.dialogRef.close();
     } else {

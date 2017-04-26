@@ -7,8 +7,7 @@ declare namespace entities {
     interface IUser {
         name: string;
     }
-    interface IModel {
-        projectName: string;
-        isValid: boolean;
+    interface IOptions{
+        
     }
 }

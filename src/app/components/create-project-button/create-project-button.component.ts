@@ -11,8 +11,6 @@ export class CreateProjectButtonComponent {
 
   @Input() public projects: entities.IProject[];
 
-  @Output() public onProjectNameCreated: EventEmitter<string> = new EventEmitter<string>();
-
   public user: entities.IUser;
 
   constructor(
@@ -21,9 +19,6 @@ export class CreateProjectButtonComponent {
 
   public openDialog() {
     const dialogRef = this.dialog.open(DialogProjectCreatorComponent);
-    dialogRef.componentInstance.projectsNames = this.projects.map(project => project.name);
-    dialogRef.afterClosed().subscribe(() => {
-      this.onProjectNameCreated.emit(dialogRef.componentInstance.projectName);
-    });
+    console.log(dialogRef.componentInstance.projectsNames);
   }
 }
