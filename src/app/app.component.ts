@@ -1,5 +1,5 @@
 import { Component, OnInit, Output } from '@angular/core';
-import { UserService, ProjectService } from './services';
+import { UserStorageService, ProjectStorageService } from './services';
 
 @Component({
   selector: 'app-root',
@@ -14,17 +14,16 @@ export class AppComponent implements OnInit {
   public currentProject: entities.IProject;
 
   public constructor(
-    private userService: UserService,
-    private projectService: ProjectService
+    private userStorageService: UserStorageService,
+    private projectStorageService: ProjectStorageService
   ) { }
 
   public ngOnInit(): void {
-    this.userService.getUser().subscribe(user => this.user = user);
-    this.projectService.getProjects(this.user.name).subscribe(projects => this.projects = projects);
+    //this.userStorageService.getUser().subscribe(user => this.user = user);
+    // this.projectStorageService.getProject(this.user.name).subscribe(projects => this.projects = projects);
   }
 
   public setCurrentProject(projectName: string): entities.IProject {
-    this.currentProject = this.projectService.setCurrentProject(projectName);
     return this.currentProject;
   }
 }

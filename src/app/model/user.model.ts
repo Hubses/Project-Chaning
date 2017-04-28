@@ -1,34 +1,24 @@
 import { Observable } from 'rxjs/Observable';
-import { ExtendedString } from '../classes/extendedString';
-// import { AbstractUser } from './user.abstract.model';
+import { StringUtil } from '../classes';
 
 export class User {
 
-    public static toJson(user: User): entities.IUser {
+    public static toJson(user: User): Object {
         return {
             name: user.name
         };
     }
 
-    public static fromJson(json: entities.IUser): User {
-        const user = new User();
-        user._name = json.name;
+    public static fromJson(json: User): User {
+        const user = new User(json.name);
         return user;
     }
 
-    public static toObservable(user: User): Observable<entities.IUser> {
-        return Observable.of(user);
-    }
-
     public constructor(
-        private _name?: string
+        public name: string
     ) {
-        if (ExtendedString.isNullorWhiteSpace(_name)) {
-            _name = 'User1';
+        if (StringUtil.isNullorWhiteSpace(name)) {
+            throw new Error('name is required');
         }
-    }
-
-    public get name(): string {
-        return this._name;
     }
 }

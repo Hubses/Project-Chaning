@@ -1,19 +1,18 @@
 import { Observable } from 'rxjs/Observable';
-import { ExtendedString } from '../classes';
+import { StringUtil } from '../classes';
 
 export class Project {
 
     public static toJson(project: Project): entities.IProject {
         return {
-            name: project._name,
-            framework: project._framework,
+            name: project.name,
+            framework: project.framework,
             options: project._options
         };
     }
 
-    public static fromJson(json: entities.IProject): Project {
-        const project = new Project(json.name);
-        project._framework = json.framework;
+    public static fromJson(json: any): Project {
+        const project = new Project(json.name, json.framework);
         project._options = json.options;
         return project;
     }
@@ -23,29 +22,16 @@ export class Project {
     }
 
     public constructor(
-        private _name: string,
-        private _framework?: string,
+        public name: string,
+        public framework: string,
         private _options?: string[]
     ) {
-        if (ExtendedString.isNullorEmpty(_framework)) {
-            _framework = 'some framework';
+        if (StringUtil.isNullorEmpty(name)) {
+            throw new Error('name is reqired');
         }
-    }
-
-    public get name(): string {
-        return this._name;
-    }
-
-    public set name(name: string) {
-        this._name = name;
-    }
-
-    public get framework(): string {
-        return this._framework;
-    }
-
-    public set framework(framework: string) {
-        this._framework = framework;
+        if (StringUtil.isNullorEmpty(framework)) {
+            throw new Error('Framework is reqired');
+        }
     }
 
     public get options(): string[] {

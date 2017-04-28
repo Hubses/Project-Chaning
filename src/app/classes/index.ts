@@ -1,2 +1,1 @@
-export { ExtendedString } from './extendedString';
-export { Serializable } from './serializable';
+export { StringUtil } from './string.util';

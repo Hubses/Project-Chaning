@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MdDialogRef } from '@angular/material';
 
-import { UserService } from "../../services";
+import { UserStorageService } from '../../services';
 
 @Component({
   selector: 'app-dialog-user-name-edit',
@@ -12,7 +12,6 @@ export class DialogUserNameEditComponent implements OnInit {
 
   constructor(
     public dialogRef: MdDialogRef<DialogUserNameEditComponent>,
-    private userService: UserService
   ) { }
 
   ngOnInit() {

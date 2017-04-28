@@ -2,7 +2,7 @@ import { Component, Input, Output } from '@angular/core';
 import { MdDialogRef } from '@angular/material';
 import { Observable } from 'rxjs/Observable';
 
-import { ProjectService } from '../../services/project.service';
+import { ProjectStorageService } from '../../services';
 
 @Component({
   selector: 'app-dialog-project-creator',
@@ -14,13 +14,14 @@ export class DialogProjectCreatorComponent {
   public projectName: string;
   public projectsNames: string[];
 
+  public framework: string;
+
 
   public constructor(
     public dialogRef: MdDialogRef<DialogProjectCreatorComponent>,
-    private projectService: ProjectService
+    private projectStorageService: ProjectStorageService
   ) {
-    console.log('test');
-    this.projectsNames = this.projectService.getNames();
+    this.projectsNames = this.projectStorageService.getNames();
   }
 
 
@@ -32,12 +33,13 @@ export class DialogProjectCreatorComponent {
     }
   }
 
-  public createProject(projectName: string): void {
-
+  public createProject(projectName: string, framework: string): void {
     if (this.valid) {
-      this.projectService.createProject(projectName);
+
+      this.projectStorageService.createProject(projectName, framework);
       console.log('valid');
       this.dialogRef.close();
+
     } else {
       console.log('not valid');
     }

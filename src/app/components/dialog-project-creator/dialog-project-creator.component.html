@@ -1,9 +1,13 @@
 <div class="title">Dialog Title</div>
 <md-input-container>
-  <input [(ngModel)]='projectName' #ctrl='ngModel' mdInput minlength="1" placeholder="Write project name" required mdType="date">
+  <input [(ngModel)]='projectName' #ctrl='ngModel' mdInput minlength="1" placeholder="Write project name" required>
   <md-error>
     <span *ngIf="!ctrl.empty">Empty</span>
-    <span *ngIf="ctrl.empty"> Not a Empty lol</span>
+  </md-error>
+
+  <input [(ngModel)]='framework' #ctrl='ngModel' mdInput minlength="1" placeholder="Write framework name" required>
+  <md-error>
+    <span *ngIf="!ctrl.empty">Empty</span>
   </md-error>
 </md-input-container>
-<button md-raised-button (click)="createProject(projectName)">Create</button>
+<button md-raised-button (click)="createProject(projectName,framework)">Create</button>

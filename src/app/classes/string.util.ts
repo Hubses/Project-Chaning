@@ -1,4 +1,4 @@
-export class ExtendedString extends String {
+export class StringUtil extends String {
 
     public static isNullorWhiteSpace(stringValue: string): boolean {
         if (this.isNullorEmpty(stringValue)) {
@@ -15,4 +15,3 @@ export class ExtendedString extends String {
         }
     }
 }
-//уточнить у Саши про сервисы и расширения про базовые типы

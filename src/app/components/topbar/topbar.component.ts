@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MdDialog } from '@angular/material';
 import { DialogUserNameEditComponent } from '../dialog-user-name-edit/dialog-user-name-edit.component';
-import { UserService } from '../../services/user.service';
+import { UserStorageService } from '../../services';
 
 @Component({
   selector: 'app-topbar',
@@ -13,12 +13,12 @@ export class TopbarComponent implements OnInit {
   public name: string;
 
   public constructor(
-    private userService: UserService,
+    private userStorageService: UserStorageService,
     public dialog: MdDialog
   ) { }
 
   ngOnInit() {
-    this.userService.getUser().subscribe(user => this.name = user.name);
+    this.userStorageService.getUser().subscribe(user => this.name = user.name);
   }
 
   public get user(): any {

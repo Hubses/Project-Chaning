@@ -18,11 +18,11 @@ import {
   CreateProjectButtonComponent
 } from './components';
 
-import { ProjectDetailComponent } from './container';
+import { ProjectDetailComponent } from './containers';
 
 import {
-  UserService,
-  ProjectService
+  UserStorageService,
+  ProjectStorageService
 } from './services';
 
 const routes: Routes = [
@@ -53,8 +53,8 @@ const routes: Routes = [
   ],
   entryComponents: [DialogProjectCreatorComponent, DialogUserNameEditComponent],
   providers: [
-    UserService,
-    ProjectService
+    UserStorageService,
+    ProjectStorageService
   ],
   bootstrap: [AppComponent]
 })
