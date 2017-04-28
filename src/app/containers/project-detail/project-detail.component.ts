@@ -2,7 +2,7 @@ import { Component, OnInit, Input, EventEmitter } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 
 import { ProjectStorageService } from '../../services';
-import { Observable } from "rxjs/Observable";
+import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'app-project-detail',
@@ -12,7 +12,6 @@ import { Observable } from "rxjs/Observable";
 export class ProjectDetailComponent implements OnInit {
 
   public currentProject: entities.IProject;
-  private projects: entities.IProject[];
 
   constructor(
     private projectStorageService: ProjectStorageService,

@@ -26,7 +26,7 @@ export class UserStorageService {
 
       user = JSON.stringify(new User('123'));
       localStorage.setItem(this.KEY, user);
-
+      return Observable.of(JSON.parse(user));
     }
   }
 

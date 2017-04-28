@@ -12,7 +12,6 @@ export class Project {
     }
 
     public static fromJson(json: any): Project {
-        console.log(json);
         const project = new Project(json.name, json.framework);
         project._options = json.options;
         return project;

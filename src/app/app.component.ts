@@ -28,7 +28,6 @@ export class AppComponent implements OnInit {
 
   public setCurrentProject(projectName: string): entities.IProject {
     this.currentProject = this.projectStorageService.getProject(projectName);
-    console.log(this.currentProject);
     this.router.navigate(['/project', this.currentProject.name]);
     return this.currentProject;
   }
