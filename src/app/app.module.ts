@@ -18,7 +18,10 @@ import {
   CreateProjectButtonComponent
 } from './components';
 
-import { ProjectDetailComponent } from './containers';
+import {
+  ProjectDetailComponent,
+  DefaultContainerComponent
+} from './containers';
 
 import {
   UserStorageService,
@@ -26,13 +29,13 @@ import {
 } from './services';
 
 const routes: Routes = [
-  { path: '', component: ProjectDetailComponent },
+  { path: '', component: DefaultContainerComponent },
+  { path: 'project/:name', component: ProjectDetailComponent },
   { path: '**', component: NotFoundComponent }
 ];
 
 
 @NgModule({
-
   declarations: [
     AppComponent,
     TopbarComponent,
@@ -41,7 +44,8 @@ const routes: Routes = [
     DialogProjectCreatorComponent,
     NotFoundComponent,
     DialogUserNameEditComponent,
-    ProjectDetailComponent
+    ProjectDetailComponent,
+    DefaultContainerComponent
   ],
   imports: [
     BrowserModule,

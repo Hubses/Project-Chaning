@@ -11,8 +11,6 @@ export class CreateProjectButtonComponent {
 
   @Input() public projects: entities.IProject[];
 
-  public user: entities.IUser;
-
   constructor(
     public dialog: MdDialog,
   ) { }

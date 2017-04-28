@@ -13,21 +13,29 @@ export class ProjectStorageService {
   public constructor() {
   }
 
-  public getProjects(): Observable<entities.IProject> {
-    const stringProjects = localStorage.getItem(this.KEY);
-    const projects: Project = Project.fromJson(stringProjects);
-    return Observable.of(projects);
-  }
+  public getProjects(): Observable<entities.IProject[]> {
+    let projects = localStorage.getItem(this.KEY);
+    if (projects !== null) {
 
-  public getProject(userName: string): Observable<entities.IProject> {
-    const project = localStorage.getItem(userName);
-    if (project !== null) {
-      return Observable.of(Project.fromJson(JSON.parse(project)));
+      this.projects = JSON.parse(projects);
+      return Observable.of(JSON.parse(projects));
+
     } else {
-      localStorage.setItem(this.KEY, JSON.stringify(new Project('test', '1234567890')));
-      return;
+
+      projects = JSON.stringify(new Project('test', '12345'));
+      localStorage.setItem(this.KEY, projects);
+      this.projects = JSON.parse(projects);
+      return Observable.of(JSON.parse(projects));
+
     }
   }
+
+  public getProject(projectName: string): entities.IProject {
+    console.log(this.projects);
+    const findedProject = this.projects.find(project => projectName === project.name);
+    return findedProject;
+  }
+
 
   public createProject(name: string, framework: string): void {
     const project = new Project(name, framework);
