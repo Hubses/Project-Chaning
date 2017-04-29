@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MdDialog } from '@angular/material';
 import { DialogUserNameEditComponent } from '../dialog-user-name-edit/dialog-user-name-edit.component';
 import { UserStorageService } from '../../services';
+import { Observable } from "rxjs/Observable";
 
 @Component({
   selector: 'app-topbar',
@@ -10,7 +11,7 @@ import { UserStorageService } from '../../services';
 })
 export class TopbarComponent implements OnInit {
 
-  public name: string;
+  public observableUser: Observable<any>;
 
   public constructor(
     private userStorageService: UserStorageService,
@@ -18,11 +19,7 @@ export class TopbarComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.userStorageService.getUser().subscribe(user => this.name = user.name);
-  }
-
-  public get user(): any {
-    return this.name;
+    this.observableUser = this.userStorageService.getUser();
   }
 
   public openDialog() {

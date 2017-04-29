@@ -3,7 +3,7 @@
   <md-sidenav #sidenav mode="side" opened="true">
     <md-list class="list">
       <md-list-item class="list-header"> Projects </md-list-item>
-      <md-list-item *ngFor="let project of projects">
+      <md-list-item *ngFor="let project of observableProjects|async">
         <button md-button (click)="setCurrentProject(project.name)" class="list-item__button">{{project.name}}</button>
       </md-list-item>
     </md-list>
@@ -12,12 +12,5 @@
   <app-create-project-button [projects]="projects"></app-create-project-button>
 
   <router-outlet></router-outlet>
-
-
-  <!--<app-main [projects]="projects">
-    
-  </app-main>-->
-
-  <app-footer></app-footer>
 
 </md-sidenav-container>

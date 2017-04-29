@@ -3,37 +3,31 @@ import { Observable } from 'rxjs/Observable';
 
 import { Project } from '../model/project.model';
 
-var projects = [{
-  'name': '123',
-  'framework': 'angular'
-},
-{
-  'name': '123',
-  'framework': 'angular'
-}]
-
 @Injectable()
 export class ProjectStorageService {
 
   private projects: entities.IProject[] = [];
-
   private KEY = 'ProjectStorage__KEY';
+  public observableProjects: Observable<entities.IProject[]> = Observable.of(this.projects);
 
   public constructor() {
   }
 
   public getProjects(): Observable<entities.IProject[]> {
-    let projects = localStorage.getItem(this.KEY);
+    const projects = localStorage.getItem(this.KEY);
     if (projects !== null) {
+
       this.projects = JSON.parse(projects);
-      return Observable.of(JSON.parse(projects));
+      this.observableProjects = Observable.of(this.projects);
+      return this.observableProjects;
 
     } else {
 
       this.projects.push(new Project('test', '12345'));
       localStorage.setItem(this.KEY, JSON.stringify(this.projects));
       this.projects = JSON.parse(projects);
-      return Observable.of(JSON.parse(projects));
+      this.observableProjects = Observable.of(this.projects);
+      return this.observableProjects;
 
     }
   }
@@ -47,11 +41,19 @@ export class ProjectStorageService {
   public createProject(name: string, framework: string): void {
     const project = new Project(name, framework);
     this.projects.push(project);
+    localStorage.setItem(this.KEY, JSON.stringify(this.projects));
   }
 
   public getNames(): string[] {
     return this.projects.map(project => {
       return project.name;
     });
+  }
+
+  public removeProject(projectName: string): void {
+    const removableProjectIndex = this.projects.findIndex(project => projectName === project.name);
+    this.projects.slice(removableProjectIndex);
+    this.observableProjects = Observable.of(this.projects);
+    localStorage.setItem(this.KEY, JSON.stringify(this.projects));
   }
 }

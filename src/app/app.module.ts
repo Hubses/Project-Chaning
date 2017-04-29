@@ -5,7 +5,7 @@ import { HttpModule } from '@angular/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule, Routes } from '@angular/router';
 
-import { MaterialModule } from '@angular/material';
+import { MaterialModule, MdSnackBarRef } from '@angular/material';
 
 import { AppComponent } from './app.component';
 
@@ -15,12 +15,13 @@ import {
   TopbarComponent,
   DialogProjectCreatorComponent,
   DialogUserNameEditComponent,
-  CreateProjectButtonComponent
+  CreateProjectButtonComponent,
+  CardProjectComponent
 } from './components';
 
 import {
   ProjectDetailComponent,
-  DefaultContainerComponent
+  ProjectsContainerComponent
 } from './containers';
 
 import {
@@ -28,8 +29,10 @@ import {
   ProjectStorageService
 } from './services';
 
+
 const routes: Routes = [
-  { path: '', component: DefaultContainerComponent },
+  { path: '', redirectTo: '/projects', pathMatch: 'full' },
+  { path: 'projects', component: ProjectsContainerComponent },
   { path: 'project/:name', component: ProjectDetailComponent },
   { path: '**', component: NotFoundComponent }
 ];
@@ -45,7 +48,8 @@ const routes: Routes = [
     NotFoundComponent,
     DialogUserNameEditComponent,
     ProjectDetailComponent,
-    DefaultContainerComponent
+    ProjectsContainerComponent,
+    CardProjectComponent,
   ],
   imports: [
     BrowserModule,
@@ -53,7 +57,7 @@ const routes: Routes = [
     HttpModule,
     BrowserAnimationsModule,
     RouterModule.forRoot(routes),
-    MaterialModule
+    MaterialModule.forRoot()
   ],
   entryComponents: [DialogProjectCreatorComponent, DialogUserNameEditComponent],
   providers: [

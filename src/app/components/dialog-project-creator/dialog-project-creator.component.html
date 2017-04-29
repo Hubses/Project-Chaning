@@ -4,10 +4,10 @@
   <md-error>
     <span *ngIf="!ctrl.empty">Empty</span>
   </md-error>
-
-  <input [(ngModel)]='framework' #ctrl='ngModel' mdInput minlength="1" placeholder="Write framework name" required>
-  <md-error>
-    <span *ngIf="!ctrl.empty">Empty</span>
-  </md-error>
 </md-input-container>
+<md-select placeholder="select framework">
+  <md-option *ngFor="let frames of frameworks" [value]="frames.value" (click)="setFramework(frames.viewValue)">
+    {{ frames.viewValue }}
+  </md-option>
+</md-select>
 <button md-raised-button (click)="createProject(projectName,framework)">Create</button>

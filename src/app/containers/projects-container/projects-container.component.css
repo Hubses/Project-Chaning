@@ -1,0 +1,19 @@
+.project-image.mat-card-image{
+    margin: 0;
+}
+.example-card{
+    width: 400px;
+    padding: 10px;
+    margin: 10px;
+}
+.project-image{
+    /*background-image: url();
+    background-size: cover;*/
+    width: 400px;
+}
+.projects{
+    padding: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}

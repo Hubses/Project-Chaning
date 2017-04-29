@@ -34,5 +34,4 @@ export class ProjectDetailComponent implements OnInit {
   public getName(): string {
     return this.currentProject.name;
   }
-
 }

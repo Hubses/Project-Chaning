@@ -1,0 +1,23 @@
+<div class="projects">
+  <md-card class="example-card" *ngFor="let project of observableProjects|async">
+    <md-card-header>
+      <md-card-title>name: {{project.name}}</md-card-title>
+      <md-card-subtitle>framework: {{project.framework}}</md-card-subtitle>
+    </md-card-header>
+    <div class="card-image">
+      <img md-card-image class="project-image" src="https://angular.io/resources/images/logos/angular/angular.svg">
+    </div>
+    <md-card-content>
+      <p *ngIf="project.options">
+        options: {{project.options}}
+      </p>
+      <p *ngIf="!project.options">
+        options: no options yet
+      </p>
+    </md-card-content>
+    <md-card-actions>
+      <button md-button (click)="viewDetail(project.name)">VIEW DETAIL</button>
+      <button md-button (click)="generate(project.name)">GENERATE</button>
+    </md-card-actions>
+  </md-card>
+</div>
