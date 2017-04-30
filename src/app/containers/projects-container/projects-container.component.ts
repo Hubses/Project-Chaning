@@ -13,8 +13,13 @@ import { Observable } from 'rxjs/Observable';
 })
 export class ProjectsContainerComponent implements OnInit {
 
-  // public projects: entities.IProject[];
-  public observableProjects: Observable<entities.IProject[]>;
+  public projects$: Observable<entities.IProject[]>;
+
+  public urls = {
+    angular2: 'https://angular.io/resources/images/logos/angular/angular.svg',
+    react: 'https://react.parts/react-logo.svg',
+    jquery: 'http://www.css-tricks.ru/content/data/6/jquery-icon.png'
+  };
 
   constructor(
     private snackBar: MdSnackBar,
@@ -23,17 +28,19 @@ export class ProjectsContainerComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.observableProjects = this.projectStorageService.getProjects();
+    this.projects$ = this.projectStorageService.projects$;
   }
 
   public viewDetail(projectName: string): entities.IProject {
-    const currentProject = this.projectStorageService.getProject(projectName);
+    const currentProject = this.projectStorageService.find(projectName);
     this.router.navigate(['/project', currentProject.name]);
     return currentProject;
   }
 
-  public generate(projectName: string) {
-    const currentProject = this.projectStorageService.getProject(projectName);
+  public generateProject(projectName: string) {
+
+    const currentProject = this.projectStorageService.find(projectName);
+
     const snackbarRef = this.snackBar.open('generating, please wait', 'OK', {
       duration: 3000
     });
@@ -43,5 +50,9 @@ export class ProjectsContainerComponent implements OnInit {
     snackbarRef.afterDismissed().subscribe(() => {
       console.log(currentProject.name + ' generate ending');
     });
+  }
+
+  public removeProject(projectsName: string): void {
+    this.projectStorageService.remove(projectsName);
   }
 }

@@ -15,7 +15,6 @@ import {
   TopbarComponent,
   DialogProjectCreatorComponent,
   DialogUserNameEditComponent,
-  CreateProjectButtonComponent,
   CardProjectComponent
 } from './components';
 
@@ -42,7 +41,6 @@ const routes: Routes = [
   declarations: [
     AppComponent,
     TopbarComponent,
-    CreateProjectButtonComponent,
     FooterComponent,
     DialogProjectCreatorComponent,
     NotFoundComponent,

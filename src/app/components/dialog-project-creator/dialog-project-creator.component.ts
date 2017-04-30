@@ -43,7 +43,7 @@ export class DialogProjectCreatorComponent {
 
     if (this.valid) {
 
-      this.projectStorageService.createProject(projectName, framework);
+      this.projectStorageService.create(projectName, framework);
       console.log('valid');
       this.dialogRef.close();
 

@@ -2,18 +2,24 @@
     margin: 0;
 }
 .example-card{
-    width: 400px;
+    width: 256px;
     padding: 10px;
     margin: 10px;
 }
 .project-image{
-    /*background-image: url();
-    background-size: cover;*/
-    width: 400px;
+    width: 256px;
+    height: 256px;
 }
 .projects{
     padding: 10px;
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-around;
+    justify-content: flex-start;
+}
+.example-fill-remaining-space{
+    flex: 1 1 auto;
+}
+.project-image.mat-card-image:first-child{
+    width: 100%;
+    margin: 0
 }

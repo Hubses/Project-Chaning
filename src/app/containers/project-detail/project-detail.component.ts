@@ -22,7 +22,7 @@ export class ProjectDetailComponent implements OnInit {
 
   ngOnInit() {
     this.route.params
-      .switchMap((params: Params) => Observable.of(this.projectStorageService.getProject(params['name'])))
+      .switchMap((params: Params) => Observable.of(this.projectStorageService.find(params['name'])))
       .subscribe((project: entities.IProject) => this.currentProject = project);
   }
 
