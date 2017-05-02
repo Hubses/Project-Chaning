@@ -15,7 +15,7 @@ export class User {
     }
 
     public constructor(
-        public name: string
+        public name: string,
     ) {
         if (StringUtil.isNullorWhiteSpace(name)) {
             throw new Error('name is required');

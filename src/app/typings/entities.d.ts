@@ -4,7 +4,8 @@ declare namespace entities {
         framework: string;
         options: string[];
     }
-    interface IOptions{
-        
+    interface IOptions {
+        taskruner: string,
+        libs: string[]
     }
 }

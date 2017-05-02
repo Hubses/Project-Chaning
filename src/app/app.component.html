@@ -13,6 +13,13 @@
     </md-list>
   </md-sidenav>
 
+  <button md-raised-button (click)="login()">
+  <img width="30" src="google-logo.png" />Use My Google Account
+</button>
+  <button md-raised-button (click)="logout()">
+  Logout
+</button>
+
   <router-outlet></router-outlet>
 
 </md-sidenav-container>

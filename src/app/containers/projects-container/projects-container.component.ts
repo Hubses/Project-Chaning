@@ -5,6 +5,8 @@ import { Router } from '@angular/router';
 import { MdSnackBar, MdSnackBarRef, MdSnackBarConfig } from '@angular/material';
 import { Observable } from 'rxjs/Observable';
 
+import { Application } from "../../model";
+
 @Component({
   selector: 'app-default-container',
   templateUrl: './projects-container.component.html',
@@ -13,7 +15,7 @@ import { Observable } from 'rxjs/Observable';
 })
 export class ProjectsContainerComponent implements OnInit {
 
-  public projects$: Observable<entities.IProject[]>;
+  public projects$: Observable<Application>;
 
   public urls = {
     angular2: 'https://angular.io/resources/images/logos/angular/angular.svg',

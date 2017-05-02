@@ -14,19 +14,29 @@ import {
   NotFoundComponent,
   TopbarComponent,
   DialogProjectCreatorComponent,
-  DialogUserNameEditComponent,
+  DialogLoginComponent,
   CardProjectComponent
 } from './components';
 
 import {
   ProjectDetailComponent,
-  ProjectsContainerComponent
+  ProjectsContainerComponent,
+  LoginContainerComponent
 } from './containers';
 
 import {
   UserStorageService,
-  ProjectStorageService
+  ProjectStorageService,
+  AppStorageService
 } from './services';
+
+import {
+  AngularFireModule,
+  AuthMethods,
+  AuthProviders
+} from 'angularfire2';
+
+import { firebaseConfig } from './firebase.config';
 
 
 const routes: Routes = [
@@ -44,10 +54,11 @@ const routes: Routes = [
     FooterComponent,
     DialogProjectCreatorComponent,
     NotFoundComponent,
-    DialogUserNameEditComponent,
+    DialogLoginComponent,
     ProjectDetailComponent,
     ProjectsContainerComponent,
     CardProjectComponent,
+    LoginContainerComponent,
   ],
   imports: [
     BrowserModule,
@@ -55,12 +66,17 @@ const routes: Routes = [
     HttpModule,
     BrowserAnimationsModule,
     RouterModule.forRoot(routes),
-    MaterialModule.forRoot()
+    MaterialModule.forRoot(),
+    AngularFireModule.initializeApp(firebaseConfig, {
+      provider: AuthProviders.Google,
+      method: AuthMethods.Popup
+    })
   ],
-  entryComponents: [DialogProjectCreatorComponent, DialogUserNameEditComponent],
+  entryComponents: [DialogProjectCreatorComponent, DialogLoginComponent],
   providers: [
     UserStorageService,
-    ProjectStorageService
+    ProjectStorageService,
+    AppStorageService
   ],
   bootstrap: [AppComponent]
 })
