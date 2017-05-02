@@ -1,0 +1,14 @@
+<div class="sidebar">
+  <md-sidenav #sidenav mode="side" opened="true">
+    <md-list class="list">
+      <md-list-item>
+        <button md-raised-button (click)="openDialog()">
+          New Project
+        </button>
+      </md-list-item>
+      <md-list-item *ngFor="let project of projects$ | async">
+        <button md-button (click)="setCurrentProject(project.name)">{{project.name}}</button>
+      </md-list-item>
+    </md-list>
+  </md-sidenav>
+</div>

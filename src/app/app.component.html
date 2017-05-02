@@ -1,25 +1,2 @@
-<app-topbar></app-topbar>
-<md-sidenav-container class="example-container">
-  <md-sidenav #sidenav mode="side" opened="true">
-    <md-list class="list">
-      <md-list-item>
-        <button md-raised-button (click)="openDialog()">
-          New Project
-        </button>
-      </md-list-item>
-      <md-list-item *ngFor="let project of projects$ | async">
-        <button md-button (click)="setCurrentProject(project.name)">{{project.name}}</button>
-      </md-list-item>
-    </md-list>
-  </md-sidenav>
-
-  <button md-raised-button (click)="login()">
-  <img width="30" src="google-logo.png" />Use My Google Account
-</button>
-  <button md-raised-button (click)="logout()">
-  Logout
-</button>
-
-  <router-outlet></router-outlet>
-
-</md-sidenav-container>
+<app-topbar *ngIf="user" [userName]="user.name" (onLogout)="logout()"></app-topbar>
+<router-outlet></router-outlet>

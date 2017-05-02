@@ -15,19 +15,21 @@ import {
   TopbarComponent,
   DialogProjectCreatorComponent,
   DialogLoginComponent,
-  CardProjectComponent
+  CardProjectComponent,
+  LoginComponent,
+  SidebarComponent
 } from './components';
 
 import {
   ProjectDetailComponent,
   ProjectsContainerComponent,
-  LoginContainerComponent
 } from './containers';
 
 import {
   UserStorageService,
   ProjectStorageService,
-  AppStorageService
+  AppStorageService,
+  UserService
 } from './services';
 
 import {
@@ -40,7 +42,8 @@ import { firebaseConfig } from './firebase.config';
 
 
 const routes: Routes = [
-  { path: '', redirectTo: '/projects', pathMatch: 'full' },
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
+  { path: 'login', component: LoginComponent },
   { path: 'projects', component: ProjectsContainerComponent },
   { path: 'project/:name', component: ProjectDetailComponent },
   { path: '**', component: NotFoundComponent }
@@ -58,7 +61,8 @@ const routes: Routes = [
     ProjectDetailComponent,
     ProjectsContainerComponent,
     CardProjectComponent,
-    LoginContainerComponent,
+    LoginComponent,
+    SidebarComponent,
   ],
   imports: [
     BrowserModule,
@@ -76,7 +80,8 @@ const routes: Routes = [
   providers: [
     UserStorageService,
     ProjectStorageService,
-    AppStorageService
+    AppStorageService,
+    UserService
   ],
   bootstrap: [AppComponent]
 })

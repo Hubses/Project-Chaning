@@ -5,7 +5,11 @@ declare namespace entities {
         options: string[];
     }
     interface IOptions {
-        taskruner: string,
-        libs: string[]
+        taskruner: string;
+        libs: string[];
+    }
+    interface IUser {
+        id: string;
+        name: string;
     }
 }

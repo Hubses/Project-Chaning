@@ -1,10 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { MdDialog } from '@angular/material';
-import { DialogLoginComponent } from '../';
-import { UserStorageService } from '../../services';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-
-import { User } from '../../model';
 
 @Component({
   selector: 'app-topbar',
@@ -15,19 +10,21 @@ export class TopbarComponent implements OnInit {
 
   @Input() public userName: string;
 
-  public user$: Observable<User>;
+  @Output() public onLogout: EventEmitter<void> = new EventEmitter<void>();
 
   public constructor(
-    private userStorageService: UserStorageService,
-    public dialog: MdDialog
+
   ) { }
 
   ngOnInit() {
-    this.user$ = this.userStorageService.user$;
+
   }
 
-  public openDialog() {
-    const dialogRef = this.dialog.open(DialogLoginComponent);
+  ngOnChanges() {
+    console.log(this.userName);
   }
 
+  logout() {
+    this.onLogout.emit();
+  }
 }
