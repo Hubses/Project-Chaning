@@ -1,30 +1,17 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-topbar',
   templateUrl: './topbar.component.html',
   styleUrls: ['./topbar.component.css']
 })
-export class TopbarComponent implements OnInit {
+export class TopbarComponent {
 
   @Input() public user: entities.IUser;
 
   @Output() public onLogout: EventEmitter<void> = new EventEmitter<void>();
 
-  public constructor(
-
-  ) { }
-
-  ngOnInit() {
-
-  }
-
-  ngOnChanges() {
-    console.log(this.user);
-  }
-
-  logout() {
+  public logout(): void {
     this.onLogout.emit();
   }
 }

@@ -1,39 +1,30 @@
-import { Component, OnInit, Output, ViewEncapsulation, ChangeDetectionStrategy } from '@angular/core';
-import { UserStorageService, ProjectStorageService, LoginService } from './services';
-
-import { User } from './model';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs/Observable';
-import { MdDialog } from '@angular/material';
-import { DialogProjectCreatorComponent } from './components';
-import { Application } from './model';
+import { AuthService } from './services';
 
-import { AngularFire, AuthProviders, AuthMethods } from 'angularfire2';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css'],
-  encapsulation: ViewEncapsulation.None
+  styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, OnDestroy {
 
-  public user: entities.IUser;
+  private userSubscription: Subscription;
 
   public constructor(
-    private userService: LoginService,
-    private userStorageService: UserStorageService,
+    private userService: AuthService,
     private router: Router
   ) { }
 
-  public ngOnInit() {
-    this.userService.user$.subscribe(user => {
-      this.user = user;
-      user ? this.router.navigate(['/projects']) : this.router.navigate(['/login']);
-    });
+  public ngOnInit(): void {
+    this.userSubscription = this.userService.user$.subscribe(user =>
+      user ? this.router.navigate(['/projects']) : this.router.navigate(['/login'])
+    );
   }
 
-  logout() {
-    this.userService.logout();
+  public ngOnDestroy(): void {
+    this.userSubscription.unsubscribe();
   }
 }

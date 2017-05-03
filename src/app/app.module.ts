@@ -5,7 +5,7 @@ import { HttpModule } from '@angular/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule, Routes } from '@angular/router';
 
-import { MaterialModule, MdSnackBarRef } from '@angular/material';
+import { MaterialModule } from '@angular/material';
 
 import { AppComponent } from './app.component';
 
@@ -29,7 +29,7 @@ import {
   UserStorageService,
   ProjectStorageService,
   AppStorageService,
-  LoginService
+  AuthService
 } from './services';
 
 import {
@@ -40,7 +40,6 @@ import {
 
 import { firebaseConfig } from './firebase.config';
 
-
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
@@ -48,7 +47,6 @@ const routes: Routes = [
   { path: 'project/:name', component: ProjectDetailComponent },
   { path: '**', component: NotFoundComponent }
 ];
-
 
 @NgModule({
   declarations: [
@@ -81,7 +79,7 @@ const routes: Routes = [
     UserStorageService,
     ProjectStorageService,
     AppStorageService,
-    LoginService
+    AuthService
   ],
   bootstrap: [AppComponent]
 })

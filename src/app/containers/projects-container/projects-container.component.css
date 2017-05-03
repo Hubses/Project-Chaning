@@ -1,3 +1,8 @@
+md-sidenav-container{ 
+  width: 100%; 
+  height: calc(100% - 64px); 
+} 
+
 .project-image.mat-card-image{
     margin: 0;
 }

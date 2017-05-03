@@ -1,29 +1,18 @@
-import { Component, OnInit } from '@angular/core';
-import { AuthProviders, AuthMethods, AngularFire } from 'angularfire2';
-import { LoginService } from '../../services';
+import { Component } from '@angular/core';
+import { AuthService } from '../../services';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent {
 
-  constructor(
-    private userSerice: LoginService
-  ) {
+  public constructor(
+    private authSerice: AuthService
+  ) { }
 
+  public loginGoogle(): void {
+    this.authSerice.loginGoogle();
   }
-
-  ngOnInit() {
-
-  }
-
-  public loginGoogle() {
-    this.userSerice.loginGoogle();
-  }
-  public logout() {
-    this.userSerice.logout();
-  }
-
 }

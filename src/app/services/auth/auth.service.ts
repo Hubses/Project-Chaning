@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
-import { AngularFire, FirebaseAuthState, AuthProviders, AuthMethods, FirebaseListObservable } from 'angularfire2';
+import { AngularFire, AuthProviders, AuthMethods } from 'angularfire2';
 import { Observable } from 'rxjs/Rx';
 
 import { UserStorageService } from '../user-storage/user.storage.service';
 
 @Injectable()
-export class LoginService {
+export class AuthService {
 
-  public user$: Observable<entities.IUser>;
+  public user$: Observable<entities.IUser | null>;
 
   constructor(
     private af: AngularFire,

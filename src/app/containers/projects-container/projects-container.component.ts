@@ -1,11 +1,11 @@
-import { Component, OnInit, ViewEncapsulation, ViewContainerRef } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 
-import { ProjectStorageService } from '../../services';
+import { ProjectStorageService, AuthService } from '../../services';
 import { Router } from '@angular/router';
-import { MdSnackBar, MdSnackBarRef, MdSnackBarConfig } from '@angular/material';
+import { MdSnackBar } from '@angular/material';
 import { Observable } from 'rxjs/Observable';
 
-import { Application } from "../../model";
+import { Application } from '../../model';
 
 @Component({
   selector: 'app-default-container',
@@ -15,6 +15,7 @@ import { Application } from "../../model";
 })
 export class ProjectsContainerComponent implements OnInit {
 
+  public user: entities.IUser | null;
   public projects$: Observable<Application>;
 
   public urls = {
@@ -26,11 +27,18 @@ export class ProjectsContainerComponent implements OnInit {
   constructor(
     private snackBar: MdSnackBar,
     private projectStorageService: ProjectStorageService,
+    private authService: AuthService,
     private router: Router,
   ) { }
 
-  ngOnInit() {
-    //this.projects$ = this.projectStorageService.projects$;
+  public ngOnInit(): void {
+    this.authService.user$.subscribe(user => {
+      this.user = user;
+    });
+  }
+
+  public logout(): void {
+    this.authService.logout();
   }
 
   public viewDetail(projectName: string): entities.IProject {
@@ -39,7 +47,7 @@ export class ProjectsContainerComponent implements OnInit {
     return currentProject;
   }
 
-  public generateProject(projectName: string) {
+  public generateProject(projectName: string): void {
 
     const currentProject = this.projectStorageService.find(projectName);
 
