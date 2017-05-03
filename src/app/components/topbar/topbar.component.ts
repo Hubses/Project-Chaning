@@ -8,7 +8,7 @@ import { Observable } from 'rxjs/Observable';
 })
 export class TopbarComponent implements OnInit {
 
-  @Input() public userName: string;
+  @Input() public user: entities.IUser;
 
   @Output() public onLogout: EventEmitter<void> = new EventEmitter<void>();
 
@@ -21,7 +21,7 @@ export class TopbarComponent implements OnInit {
   }
 
   ngOnChanges() {
-    console.log(this.userName);
+    console.log(this.user);
   }
 
   logout() {

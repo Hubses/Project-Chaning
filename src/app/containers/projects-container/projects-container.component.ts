@@ -30,7 +30,7 @@ export class ProjectsContainerComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.projects$ = this.projectStorageService.projects$;
+    //this.projects$ = this.projectStorageService.projects$;
   }
 
   public viewDetail(projectName: string): entities.IProject {

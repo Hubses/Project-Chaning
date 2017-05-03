@@ -29,7 +29,7 @@ import {
   UserStorageService,
   ProjectStorageService,
   AppStorageService,
-  UserService
+  LoginService
 } from './services';
 
 import {
@@ -81,7 +81,7 @@ const routes: Routes = [
     UserStorageService,
     ProjectStorageService,
     AppStorageService,
-    UserService
+    LoginService
   ],
   bootstrap: [AppComponent]
 })

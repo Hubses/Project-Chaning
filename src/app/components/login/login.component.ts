@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthProviders, AuthMethods, AngularFire } from 'angularfire2';
-import { UserService } from '../../services';
+import { LoginService } from '../../services';
 
 @Component({
   selector: 'app-login',
@@ -10,7 +10,7 @@ import { UserService } from '../../services';
 export class LoginComponent implements OnInit {
 
   constructor(
-    private userSerice: UserService
+    private userSerice: LoginService
   ) {
 
   }

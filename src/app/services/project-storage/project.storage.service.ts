@@ -1,26 +1,36 @@
 import { Injectable } from '@angular/core';
 import { Observable, Subject, BehaviorSubject } from 'rxjs';
-import { AppStorageService } from '../app-storage/app-storage.service';
+import { UserStorageService } from '../user-storage/user.storage.service';
 import { Project, Application } from '../../model';
+import { AngularFire } from 'angularfire2';
 
 @Injectable()
 export class ProjectStorageService {
 
-  public projects$: Observable<Application>;
+  public projects$: Observable<entities.IProject[]>;
 
   private projects: entities.IProject[] = [];
-  private KEY = 'ProjectStorage__KEY';
+
 
   public constructor(
-    private appStorageService: AppStorageService
+    private userStorageService: UserStorageService,
+    private af: AngularFire
   ) {
-    this.projects$ = this.appStorageService.data$.find(application => this.projects === application.projects);
-    console.log(this.projects$);
-    // const projects = localStorage.getItem(this.KEY);
-    // if (projects !== null) {
-    //   this.projects = JSON.parse(projects);
-    //   this.projects$.next(this.projects);
-    // }
+    // this.projects$ = this.userStorageService.users$.map((users: entities.IDB) => {
+    //   if (users) {
+    //     return {
+    //       projects: users.projects
+    //     }
+    //   } else {
+    //     return null;
+    //   }
+
+  }
+
+  public getProjects(id: string): Observable<entities.IProject[]> {
+    return this.af.database.list('/users').map((users: entities.IDB[]) => {
+      return users.find(user => user.id === id).projects;
+    });
   }
 
   public find(projectName: string): entities.IProject {
@@ -46,7 +56,7 @@ export class ProjectStorageService {
   }
 
   private updateProjects(): void {
-    localStorage.setItem(this.KEY, JSON.stringify(this.projects));
+    // localStorage.setItem(this.KEY, JSON.stringify(this.projects));
     this.projects$.concat(this.projects);
   }
 }

@@ -1,29 +1,27 @@
 import { Injectable } from '@angular/core';
-import { AngularFire, FirebaseAuthState, AuthProviders, AuthMethods } from 'angularfire2';
+import { AngularFire, FirebaseAuthState, AuthProviders, AuthMethods, FirebaseListObservable } from 'angularfire2';
 import { Observable } from 'rxjs/Rx';
 
+import * as firebase from 'firebase';
+
+import { UserStorageService } from '../user-storage/user.storage.service';
 
 @Injectable()
-export class UserService {
+export class LoginService {
 
   public user$: Observable<entities.IUser>;
 
-  private _user: FirebaseAuthState | undefined | null;
-  private storageRef = this.af.database.object('users/0');
-
   constructor(
-    private af: AngularFire
+    private af: AngularFire,
+    private userStorageService: UserStorageService
   ) {
-    console.log(this.storageRef.subscribe(data => {
-      console.log(data);
-    }));
-    this.user$ = this.af.auth.map(user => {
-      console.log(user);
 
+    this.user$ = this.af.auth.map(user => {
       if (user) {
         return {
           name: user.google.displayName,
-          id: user.uid
+          id: user.uid,
+          imageurl: user.google.photoURL
         };
       } else {
         return null;

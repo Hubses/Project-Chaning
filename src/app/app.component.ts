@@ -1,5 +1,5 @@
 import { Component, OnInit, Output, ViewEncapsulation, ChangeDetectionStrategy } from '@angular/core';
-import { UserStorageService, ProjectStorageService, UserService } from './services';
+import { UserStorageService, ProjectStorageService, LoginService } from './services';
 
 import { User } from './model';
 import { Router } from '@angular/router';
@@ -21,7 +21,8 @@ export class AppComponent implements OnInit {
   public user: entities.IUser;
 
   public constructor(
-    private userService: UserService,
+    private userService: LoginService,
+    private userStorageService: UserStorageService,
     private router: Router
   ) { }
 

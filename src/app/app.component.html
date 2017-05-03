@@ -1,2 +1,2 @@
-<app-topbar *ngIf="user" [userName]="user.name" (onLogout)="logout()"></app-topbar>
+<app-topbar *ngIf="user" [user]="user" (onLogout)="logout()"></app-topbar>
 <router-outlet></router-outlet>

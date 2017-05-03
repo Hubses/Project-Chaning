@@ -11,5 +11,11 @@ declare namespace entities {
     interface IUser {
         id: string;
         name: string;
+        imageurl?: string;
+    }
+    interface IDB {
+        id: string;
+        name: string;
+        projects: IProject[];
     }
 }

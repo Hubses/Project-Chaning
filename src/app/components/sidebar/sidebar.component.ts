@@ -26,7 +26,7 @@ export class SidebarComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.projects$ = this.projectStorageService.projects$;
+    //this.projects$ = this.projectStorageService.projects$;
   }
 
   public openDialog() {

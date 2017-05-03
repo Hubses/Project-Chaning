@@ -1,6 +1,9 @@
 <md-toolbar color="primary">
-    <span>Custom Toolbar</span>
+    <span>Project-Chaining</span>
     <span class="example-fill-remaining-space"></span>
-    <span>hello {{userName}}</span>
-    <button md-button (click)="logout()"> Logout </button>
+    <span class="user-info">
+        <img class="user-image" width="30" src="{{user.imageurl}}" />
+         <span class="user-name">{{user.name}}</span>
+    </span>
+    <button md-button (click)="logout()"> LOGOUT </button>
 </md-toolbar>

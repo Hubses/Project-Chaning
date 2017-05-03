@@ -1,26 +1,31 @@
 import { Injectable } from '@angular/core';
-import { Observable, BehaviorSubject } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs/Rx';
+import { AngularFire, FirebaseListObservable } from 'angularfire2';
 
-import { User } from '../../model';
+// import { User } from '../../model';
 
 @Injectable()
 export class UserStorageService {
-  public user$ = new BehaviorSubject<User>({ name: '' });
 
-  private user: User;
+  public users$: FirebaseListObservable<entities.IDB>;
 
+  public constructor(
+    private af: AngularFire
+  ) {
 
-  private KEY = 'UserStorage__KEY';
+  }
 
-  public constructor() {
-    const user = localStorage.getItem(this.KEY);
+  public getUserById(id: string): Observable<entities.IDB> {
+    return this.af.database.list('/users').map((users: entities.IDB[]) => {
+      return users.find(user => user.id === id);
+    });
+  }
 
-    if (user !== null) {
-      this.user = JSON.parse(user);
-    } else {
-      this.user = new User('123');
-      localStorage.setItem(this.KEY, JSON.stringify(this.user));
-    }
-    this.user$.next(this.user);
+  public AddUser(userId: string, userName: string, projects?: entities.IProject[]) {
+    this.users$.push({
+      id: userId,
+      name: userName,
+      projects: projects
+    });
   }
 }
