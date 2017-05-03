@@ -28,7 +28,7 @@ export class ProjectStorageService {
   }
 
   public getProjects(id: string): Observable<entities.IProject[]> {
-    return this.af.database.list('/users').map((users: entities.IDB[]) => {
+    return this.af.database.list('/users').map((users: any) => {
       return users.find(user => user.id === id).projects;
     });
   }

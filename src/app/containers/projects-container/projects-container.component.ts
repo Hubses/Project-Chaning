@@ -1,11 +1,9 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 
-import { ProjectStorageService, AuthService } from '../../services';
+import { ProjectStorageService, AuthService, ProjectsService } from '../../services';
 import { Router } from '@angular/router';
 import { MdSnackBar } from '@angular/material';
 import { Observable } from 'rxjs/Observable';
-
-import { Application } from '../../model';
 
 @Component({
   selector: 'app-default-container',
@@ -15,28 +13,32 @@ import { Application } from '../../model';
 })
 export class ProjectsContainerComponent implements OnInit {
 
-  public user$: Observable<entities.IUser | null>;
-  public projects$: Observable<Application>;
-
-  public urls = {
-    angular2: 'https://angular.io/resources/images/logos/angular/angular.svg',
-    react: 'https://react.parts/react-logo.svg',
-    jquery: 'http://www.css-tricks.ru/content/data/6/jquery-icon.png'
-  };
+  public user$: Observable<entities.IUser>;
+  public projects$: Observable<entities.IProject[]>;
 
   constructor(
     private snackBar: MdSnackBar,
     private projectStorageService: ProjectStorageService,
     private authService: AuthService,
+    private projectsService: ProjectsService,
     private router: Router,
   ) { }
 
   public ngOnInit(): void {
     this.user$ = this.authService.user$;
+    this.projects$ = this.user$.switchMap(user => this.projectsService.getProjects(user.id));
   }
 
   public logout(): void {
     this.authService.logout();
+  }
+
+  public createProject(project: entities.IProject): void {
+    this.projectsService.createProject(project);
+  }
+
+  public removeProject(project: entities.IProject): void {
+    this.projectsService.removeProject(project);
   }
 
   public viewDetail(projectName: string): entities.IProject {
@@ -58,9 +60,5 @@ export class ProjectsContainerComponent implements OnInit {
     snackbarRef.afterDismissed().subscribe(() => {
       console.log(currentProject.name + ' generate ending');
     });
-  }
-
-  public removeProject(projectsName: string): void {
-    this.projectStorageService.remove(projectsName);
   }
 }

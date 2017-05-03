@@ -14,10 +14,10 @@ import {
   NotFoundComponent,
   TopbarComponent,
   DialogProjectCreatorComponent,
-  DialogLoginComponent,
   CardProjectComponent,
   LoginComponent,
-  SidebarComponent
+  ProjectsSidebarComponent,
+  ProjectsListComponent
 } from './components';
 
 import {
@@ -29,7 +29,8 @@ import {
   UserStorageService,
   ProjectStorageService,
   AppStorageService,
-  AuthService
+  AuthService,
+  ProjectsService
 } from './services';
 
 import {
@@ -55,12 +56,12 @@ const routes: Routes = [
     FooterComponent,
     DialogProjectCreatorComponent,
     NotFoundComponent,
-    DialogLoginComponent,
     ProjectDetailComponent,
     ProjectsContainerComponent,
     CardProjectComponent,
     LoginComponent,
-    SidebarComponent,
+    ProjectsSidebarComponent,
+    ProjectsListComponent,
   ],
   imports: [
     BrowserModule,
@@ -74,12 +75,13 @@ const routes: Routes = [
       method: AuthMethods.Popup
     })
   ],
-  entryComponents: [DialogProjectCreatorComponent, DialogLoginComponent],
+  entryComponents: [DialogProjectCreatorComponent],
   providers: [
     UserStorageService,
     ProjectStorageService,
     AppStorageService,
-    AuthService
+    AuthService,
+    ProjectsService
   ],
   bootstrap: [AppComponent]
 })

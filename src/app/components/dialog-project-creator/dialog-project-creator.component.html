@@ -2,12 +2,12 @@
 <md-input-container>
   <input [(ngModel)]='projectName' #ctrl='ngModel' mdInput minlength="1" placeholder="Write project name" required>
   <md-error>
-      <span *ngIf="!ctrl.empty">Empty</span>
-    </md-error>
-  </md-input-container>
-  <md-select placeholder="select framework">
-    <md-option *ngFor="let frames of frameworks" [value]="frames.value" (click)="setFramework(frames.viewValue)">
-      {{ frames.viewValue }}
-    </md-option>
-  </md-select>
-  <button md-raised-button (click)="createProject(projectName,framework)">Create</button>
+    <span *ngIf="!ctrl.empty || !isValid">Empty</span>
+  </md-error>
+</md-input-container>
+<md-select placeholder="select framework">
+  <md-option *ngFor="let framework of frameworks" [value]="framework.value" (click)="setFramework(framework.viewValue)">
+    {{ framework.viewValue }}
+  </md-option>
+</md-select>
+<button md-raised-button (click)="createProject(projectName,framework)">Create</button>

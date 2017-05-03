@@ -7,25 +7,25 @@ import { AngularFire, FirebaseListObservable } from 'angularfire2';
 @Injectable()
 export class UserStorageService {
 
-  public users$: FirebaseListObservable<entities.IDB>;
+  // public users$: FirebaseListObservable<entities.IDB>;
 
-  public constructor(
-    private af: AngularFire
-  ) {
+  // public constructor(
+  //   private af: AngularFire
+  // ) {
 
-  }
+  // }
 
-  public getUserById(id: string): Observable<entities.IDB> {
-    return this.af.database.list('/users').map((users: entities.IDB[]) => {
-      return users.find(user => user.id === id);
-    });
-  }
+  // public getUserById(id: string): Observable<entities.IDB> {
+  //   return this.af.database.list('/users').map((users: entities.IDB[]) => {
+  //     return users.find(user => user.id === id);
+  //   });
+  // }
 
-  public AddUser(userId: string, userName: string, projects?: entities.IProject[]) {
-    this.users$.push({
-      id: userId,
-      name: userName,
-      projects: projects
-    });
-  }
+  // public AddUser(userId: string, userName: string, projects?: entities.IProject[]) {
+  //   this.users$.push({
+  //     id: userId,
+  //     name: userName,
+  //     projects: projects
+  //   });
+  // }
 }

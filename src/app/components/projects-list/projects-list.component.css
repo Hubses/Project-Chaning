@@ -1,0 +1,31 @@
+.projects {
+    padding: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+}
+
+.example-card {
+    width: 256px;
+    padding: 10px;
+    margin: 10px;
+}
+
+.example-fill-remaining-space {
+    flex: 1 1 auto;
+}
+
+.project-image.mat-card-image {
+    margin: 0;
+}
+
+.project-image {
+    width: 256px;
+    height: 256px;
+}
+
+
+.project-image.mat-card-image:first-child {
+    width: 100%;
+    margin: 0
+}

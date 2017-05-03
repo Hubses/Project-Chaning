@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DialogUserNameEditComponent } from './dialog-user-name-edit.component';
+import { ProjectsSidebarComponent } from './projects-sidebar.component';
 
-describe('DialogUserNameEditComponent', () => {
-  let component: DialogUserNameEditComponent;
-  let fixture: ComponentFixture<DialogUserNameEditComponent>;
+describe('ProjectsSidebarComponent', () => {
+  let component: ProjectsSidebarComponent;
+  let fixture: ComponentFixture<ProjectsSidebarComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ DialogUserNameEditComponent ]
+      declarations: [ ProjectsSidebarComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(DialogUserNameEditComponent);
+    fixture = TestBed.createComponent(ProjectsSidebarComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
