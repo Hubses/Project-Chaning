@@ -41,7 +41,7 @@ import {
 import { firebaseConfig } from './firebase.config';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/login', pathMatch: 'full' },
+  { path: '', component: AppComponent },
   { path: 'login', component: LoginComponent },
   { path: 'projects', component: ProjectsContainerComponent },
   { path: 'project/:name', component: ProjectDetailComponent },

@@ -15,7 +15,7 @@ import { Application } from '../../model';
 })
 export class ProjectsContainerComponent implements OnInit {
 
-  public user: entities.IUser | null;
+  public user$: Observable<entities.IUser | null>;
   public projects$: Observable<Application>;
 
   public urls = {
@@ -32,9 +32,7 @@ export class ProjectsContainerComponent implements OnInit {
   ) { }
 
   public ngOnInit(): void {
-    this.authService.user$.subscribe(user => {
-      this.user = user;
-    });
+    this.user$ = this.authService.user$;
   }
 
   public logout(): void {

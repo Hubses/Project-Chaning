@@ -1,4 +1,4 @@
-<app-topbar *ngIf="user" [user]="user" (onLogout)="logout()"></app-topbar>
+<app-topbar [user]="user$ | async" (onLogout)="logout()"></app-topbar>
 
 <md-sidenav-container class="example-container">
   <app-sidebar></app-sidebar>
