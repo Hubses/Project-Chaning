@@ -4,18 +4,14 @@ declare namespace entities {
         framework: string;
         options: string[];
     }
+
     interface IOptions {
         taskruner: string;
         libs: string[];
     }
+
     interface IUser {
-        id: string;
         name: string;
-        imageurl?: string;
-    }
-    interface IDB {
-        id: string;
-        name: string;
-        projects: IProject[];
+        photoUrl: string;
     }
 }

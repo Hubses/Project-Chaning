@@ -2,8 +2,6 @@ import { Injectable } from '@angular/core';
 import { AngularFire, FirebaseAuthState, AuthProviders, AuthMethods, FirebaseListObservable } from 'angularfire2';
 import { Observable } from 'rxjs/Rx';
 
-import * as firebase from 'firebase';
-
 import { UserStorageService } from '../user-storage/user.storage.service';
 
 @Injectable()
@@ -15,24 +13,24 @@ export class LoginService {
     private af: AngularFire,
     private userStorageService: UserStorageService
   ) {
-
-    this.user$ = this.af.auth.map(user => {
-      if (user) {
-        return {
-          name: user.google.displayName,
-          id: user.uid,
-          imageurl: user.google.photoURL
-        };
-      } else {
-        return null;
-      }
-    });
+    this.user$ = this.af.auth.switchMap(state => state ? this.af.database.object(`/users/${state.uid}`) : Observable.of(null));
   }
 
   public loginGoogle(): void {
     this.af.auth.login({
       provider: AuthProviders.Google,
       method: AuthMethods.Popup,
+    }).then(state => {
+      const subscription = this.af.database.object(`/users/${state.uid}`).subscribe(data => {
+        if (data.$value === null) {
+          this.af.database.object(`/users/${state.uid}`).set({
+            name: state.auth.displayName,
+            photoUrl: state.auth.photoURL
+          });
+        }
+
+        subscription.unsubscribe();
+      });
     });
   }
 
