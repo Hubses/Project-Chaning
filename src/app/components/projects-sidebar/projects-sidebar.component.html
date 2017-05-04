@@ -1,14 +1,6 @@
-<div class="sidebar">
-  <md-sidenav #sidenav mode="side" opened="true">
-    <md-list class="list">
-      <md-list-item>
-        <button md-raised-button (click)="openDialog()">
-          New Project
-        </button>
-      </md-list-item>
-      <md-list-item *ngFor="let project of projects">
-        <button md-button (click)="openProject(project.name)">{{project.name}}</button>
-      </md-list-item>
-    </md-list>
-  </md-sidenav>
+<div class="projects-sidebar">
+  <button md-raised-button (click)="openDialog()"> New Project </button>
+  <div class="projects" *ngFor="let project of projects">
+    <button md-button (click)="openProject(project.name)">{{project.name}}</button>
+  </div>
 </div>

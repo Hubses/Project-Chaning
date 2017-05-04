@@ -1,5 +1,5 @@
-.list.mat-list{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+.projects-sidebar{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }

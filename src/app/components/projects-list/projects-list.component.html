@@ -1,15 +1,16 @@
-<div class="projects">
-  <md-card class="example-card" *ngFor="let project of projects">
+<div class="project">
+  <md-card class="project-card" *ngFor="let project of projects">
     <md-card-header>
       <md-card-title>name: {{project.name}}</md-card-title>
       <md-card-subtitle>framework: {{project.framework}}</md-card-subtitle>
       <span class="example-fill-remaining-space"></span>
       <button (click)="removeProject(project)" md-mini-fab><md-icon>close</md-icon></button>
     </md-card-header>
-    <div class="card-image">
+    <div class="project-image">
       <img md-card-image class="project-image" src="{{urls[project.framework]}}">
     </div>
     <md-card-actions>
+      <button md-button (click)="generateProject(project)">GENERATE</button>
       <button md-button (click)="viewDetail(project.name)">VIEW DETAIL</button>
     </md-card-actions>
   </md-card>

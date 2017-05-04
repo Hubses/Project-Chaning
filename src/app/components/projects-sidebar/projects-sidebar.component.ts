@@ -6,7 +6,6 @@ import { DialogProjectCreatorComponent } from 'app/components';
   selector: 'projects-sidebar',
   templateUrl: './projects-sidebar.component.html',
   styleUrls: ['./projects-sidebar.component.css'],
-  encapsulation: ViewEncapsulation.None
 })
 export class ProjectsSidebarComponent {
 

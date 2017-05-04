@@ -1,4 +1,14 @@
-md-sidenav-container{ 
-  width: 100%; 
-  height: calc(100% - 64px); 
+md-sidenav-container{
+  width: 100%;
+  height: calc(100% - 64px);
+}
+.project-sidebar{
+  display: block;
+}
+.project-list{
+  display: block;
+  height: 100%;
+}
+.mat-sidenav-backdrop,div.mat-sidenav-content{
+  display: flex;
 } 

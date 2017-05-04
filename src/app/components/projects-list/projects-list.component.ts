@@ -1,9 +1,10 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, ViewEncapsulation } from '@angular/core';
 
 @Component({
   selector: 'projects-list',
   templateUrl: './projects-list.component.html',
-  styleUrls: ['./projects-list.component.css']
+  styleUrls: ['./projects-list.component.css'],
+  encapsulation: ViewEncapsulation.None
 })
 export class ProjectsListComponent {
 
@@ -11,6 +12,7 @@ export class ProjectsListComponent {
 
   @Output() public onRemoveProject: EventEmitter<entities.IProject> = new EventEmitter();
   @Output() public onViewDetail: EventEmitter<string> = new EventEmitter();
+  @Output() public onGenerateProject: EventEmitter<entities.IProject> = new EventEmitter();
 
   public urls: entities.IDictionary = {
     angular2: 'https://angular.io/resources/images/logos/angular/angular.svg',
@@ -24,6 +26,10 @@ export class ProjectsListComponent {
 
   public viewDetail(projectName: string): void {
     this.onViewDetail.emit(projectName);
+  }
+
+  public generateProject(project: entities.IProject): void {
+    this.onGenerateProject.emit(project);
   }
 
 }

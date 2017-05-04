@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, Subject, BehaviorSubject } from 'rxjs';
-import { UserStorageService } from '../user-storage/user.storage.service';
-import { Project, Application } from '../../model';
+import { Project } from '../../model';
 import { AngularFire } from 'angularfire2';
 
 @Injectable()
@@ -13,19 +12,8 @@ export class ProjectStorageService {
 
 
   public constructor(
-    private userStorageService: UserStorageService,
     private af: AngularFire
-  ) {
-    // this.projects$ = this.userStorageService.users$.map((users: entities.IDB) => {
-    //   if (users) {
-    //     return {
-    //       projects: users.projects
-    //     }
-    //   } else {
-    //     return null;
-    //   }
-
-  }
+  ) { }
 
   public getProjects(id: string): Observable<entities.IProject[]> {
     return this.af.database.list('/users').map((users: any) => {

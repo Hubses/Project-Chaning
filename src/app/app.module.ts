@@ -11,11 +11,10 @@ import { AppComponent } from './app.component';
 
 import {
   FooterComponent,
-  NotFoundComponent,
+
   TopbarComponent,
   DialogProjectCreatorComponent,
   CardProjectComponent,
-  LoginComponent,
   ProjectsSidebarComponent,
   ProjectsListComponent
 } from './components';
@@ -23,14 +22,15 @@ import {
 import {
   ProjectDetailComponent,
   ProjectsContainerComponent,
+  NotFoundComponent,
+  LoginComponent,
 } from './containers';
 
 import {
-  UserStorageService,
-  ProjectStorageService,
-  AppStorageService,
   AuthService,
-  ProjectsService
+  ProjectsService,
+  ProjectStorageService,
+  ProjectGeneratorService
 } from './services';
 
 import {
@@ -77,11 +77,10 @@ const routes: Routes = [
   ],
   entryComponents: [DialogProjectCreatorComponent],
   providers: [
-    UserStorageService,
-    ProjectStorageService,
-    AppStorageService,
     AuthService,
-    ProjectsService
+    ProjectsService,
+    ProjectStorageService,
+    ProjectGeneratorService
   ],
   bootstrap: [AppComponent]
 })

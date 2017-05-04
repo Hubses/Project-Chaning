@@ -22,3 +22,4 @@ declare namespace entities {
         libs: string[];
     }
 }
+// declare module 'file-saver';

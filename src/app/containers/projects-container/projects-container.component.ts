@@ -1,9 +1,10 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 
-import { ProjectStorageService, AuthService, ProjectsService } from '../../services';
+import { ProjectStorageService, AuthService, ProjectsService, ProjectGeneratorService } from '../../services';
 import { Router } from '@angular/router';
 import { MdSnackBar } from '@angular/material';
 import { Observable } from 'rxjs/Observable';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-default-container',
@@ -13,15 +14,19 @@ import { Observable } from 'rxjs/Observable';
 })
 export class ProjectsContainerComponent implements OnInit {
 
+  private snackBarOpenedSubscribtion: Subscription;
+  private snackBarDississedSubscribtion: Subscription;
+
   public user$: Observable<entities.IUser>;
   public projects$: Observable<entities.IProject[]>;
 
-  constructor(
+  public constructor(
     private snackBar: MdSnackBar,
     private projectStorageService: ProjectStorageService,
     private authService: AuthService,
     private projectsService: ProjectsService,
     private router: Router,
+    private projectGeneratorService: ProjectGeneratorService
   ) { }
 
   public ngOnInit(): void {
@@ -47,18 +52,21 @@ export class ProjectsContainerComponent implements OnInit {
     return currentProject;
   }
 
-  public generateProject(projectName: string): void {
-
-    const currentProject = this.projectStorageService.find(projectName);
+  public generateProject(project: entities.IProject): void {
 
     const snackbarRef = this.snackBar.open('generating, please wait', 'OK', {
       duration: 3000
     });
-    snackbarRef.afterOpened().subscribe(() => {
-      console.log(currentProject.name + ' generate starting');
+    this.snackBarOpenedSubscribtion = snackbarRef.afterOpened().subscribe(() => {
+      console.log(' generate starting');
+      this.snackBarOpenedSubscribtion.unsubscribe();
     });
-    snackbarRef.afterDismissed().subscribe(() => {
-      console.log(currentProject.name + ' generate ending');
+    this.snackBarDississedSubscribtion = snackbarRef.afterDismissed().subscribe(() => {
+      console.log(' generate ending');
+
+      this.projectGeneratorService.generateDownloadUrl();
+
+      this.snackBarDississedSubscribtion.unsubscribe();
     });
   }
 }
