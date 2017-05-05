@@ -12,13 +12,13 @@ import { Observable } from 'rxjs/Observable';
 export class ProjectDetailComponent implements OnInit {
 
   public currentProject: entities.IProject;
+  public options: string[] | entities.IOptions[];
 
   constructor(
     private projectStorageService: ProjectStorageService,
     private route: ActivatedRoute,
     private router: Router,
-  ) {
-  }
+  ) { }
 
   ngOnInit() {
     this.route.params

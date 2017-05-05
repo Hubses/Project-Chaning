@@ -3,13 +3,11 @@ import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import * as JSZip from 'jszip';
 import * as fileSaver from 'file-saver';
-import { Subscription } from "rxjs/Rx";
 
 @Injectable()
 export class ProjectGeneratorService {
 
   private jszip: JSZip = new JSZip();
-  private httpSubscribtion: Subscription;
 
   private extentions: entities.IDictionaryExtention = {
     json: 'json',
@@ -32,14 +30,14 @@ export class ProjectGeneratorService {
 
   public generateFile(filename: string, extention: string | entities.IDictionaryExtention, data: string | File | Blob, folderName?: string): JSZip {
     if (folderName) {
-      return this.jszip.folder(folderName).file(`${filename}.${extention}`, data);
+      return this.jszip.file(`${folderName}/${filename}.${extention}`, data);
       // return this.jszip.file(`${filename}.${extention}`, data).;
     } else {
       return this.jszip.file(`${filename}.${extention}`, data);
     }
   }
 
-  public generateAngular(options?: string): void {
+  public generateAngular(options?: string | entities.IOptions): void {
     let debug1 = {
       "name": "initial",
       "version": "0.0.0",
@@ -129,7 +127,7 @@ if (environment.production) {
 }
 
 platformBrowserDynamic().bootstrapModule(AppModule);
-`
+`;
 
 
     this.generateFile('package', this.extentions.json, JSON.stringify(debug1));
@@ -150,7 +148,8 @@ platformBrowserDynamic().bootstrapModule(AppModule);
     <title>Jqury project</title>
 </head>
 <body>
-    
+    <div>custom jquery template</div>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
 </body>
 </html>`;
     this.generateFile('index', this.extentions.html, indexhtml);

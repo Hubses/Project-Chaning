@@ -24,5 +24,8 @@ declare namespace entities {
     interface IDictionaryExtention {
         [extention: string]: string;
     }
+    interface IDictionaryLib {
+        [name: string]: string;
+    }
 }
 // declare module 'file-saver';
