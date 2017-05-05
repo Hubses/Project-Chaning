@@ -21,5 +21,8 @@ declare namespace entities {
         taskruner: string;
         libs: string[];
     }
+    interface IDictionaryExtention {
+        [extention: string]: string;
+    }
 }
 // declare module 'file-saver';

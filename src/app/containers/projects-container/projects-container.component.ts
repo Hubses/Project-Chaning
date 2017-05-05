@@ -58,14 +58,16 @@ export class ProjectsContainerComponent implements OnInit {
       duration: 3000
     });
     this.snackBarOpenedSubscribtion = snackbarRef.afterOpened().subscribe(() => {
-      console.log(' generate starting');
+      if (project.framework === 'angular2') {
+        this.projectGeneratorService.generateAngular();
+      }
+      if (project.framework === 'jquery') {
+        this.projectGeneratorService.generateJquery();
+      }
+
       this.snackBarOpenedSubscribtion.unsubscribe();
     });
     this.snackBarDississedSubscribtion = snackbarRef.afterDismissed().subscribe(() => {
-      console.log(' generate ending');
-
-      this.projectGeneratorService.generateDownloadUrl();
-
       this.snackBarDississedSubscribtion.unsubscribe();
     });
   }
