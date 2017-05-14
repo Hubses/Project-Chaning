@@ -8,28 +8,33 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 })
 export class ProjectEditComponent implements OnInit, OnChanges {
 
-
   public projectForm: FormGroup = this.fb.group({});
 
   @Input() public project: entities.IProject;
 
   @Output() public onUpdateProject: EventEmitter<entities.IProject> = new EventEmitter();
 
-  public frameworks = [
+  public frameworks: string[] = [
     'none',
     'angular2',
     'rect',
     'jquery'
   ];
 
-  public taskrunners = [
+  public taskrunners: string[] = [
     'gulp',
     'webpack'
-  ]
+  ];
+
+  public libs: string[] = [
+    'rxjs',
+    'd3.js',
+    'tree.js'
+  ];
 
   private options: entities.IOptions = {
-    taskrunner: 'gulp',
-    libs: ['ngrx', 'some']
+    taskrunner: '',
+    libs: []
   };
   public constructor(
     private fb: FormBuilder,
@@ -45,6 +50,7 @@ export class ProjectEditComponent implements OnInit, OnChanges {
       this.createForm(this.project);
     }
   }
+
   public updateProject(project: entities.IProject): void {
     let formProject = this.projectForm.getRawValue();
     let newProject = Object.assign({}, project);
@@ -65,11 +71,10 @@ export class ProjectEditComponent implements OnInit, OnChanges {
       name: ['', Validators.required],
       framework: ['', Validators.required],
       taskrunner: '',
-      options: {
-        libs: ['']
-      }
+      libs: ['']
     });
-    // fill data
+
+    // fill data from source
     this.projectForm.patchValue({
       name: project.name,
       framework: project.framework,

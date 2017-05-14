@@ -1,21 +1,46 @@
 <div *ngIf="project" class="project-detail">
   <button class="project-detail__return" md-button routerLink="/projects">return to projects</button>
   <form class="project-detail__form" [formGroup]="projectForm" novalidate (ngSubmit)="updateProject(project)">
-    <md-input-container class="project-form__name">
-      <input mdInput formControlName="name" placeholder="name">
-    </md-input-container>
-    <md-select class="project-creator__select" formControlName="framework" placeholder="select framework">
-      <md-option *ngFor="let framework of frameworks" [value]="framework"> {{ framework }} </md-option>
-    </md-select>
-    <div class="project-form__options">options:
-      <md-select class="project-options__taskRunner" formControlName="taskrunner" placeholder="select task runner">
-        <md-option *ngFor="let taskrunner of taskrunners" [value]="taskrunner"> {{ taskrunner }} </md-option>
-      </md-select>
+    <md-list>
+      <md-list-item>
+        <h3 md-line>write a name:</h3>
+        <md-input-container class="project-form__name">
+          <input mdInput formControlName="name">
+        </md-input-container>
+      </md-list-item>
 
-      <div class="project-options__libs">libs:
-        <div class="options-libs__lib-item" *ngFor="let lib of options.libs">{{lib}}</div>
-      </div>
-    </div>
+      <md-divider></md-divider>
+
+      <md-list-item>
+        <h3 md-line>select framework:</h3>
+        <md-select class="project-creator__select" formControlName="framework">
+          <md-option *ngFor="let framework of frameworks" [value]="framework"> {{ framework }} </md-option>
+        </md-select>
+      </md-list-item>
+      <md-divider></md-divider>
+
+      <h3 md-subheader>Options:</h3>
+      <md-list-item>
+
+        <h3 md-line>select task runner:</h3>
+
+        <md-select class="project-options__taskRunner" formControlName="taskrunner">
+          <md-option *ngFor="let taskrunner of taskrunners" [value]="taskrunner"> {{ taskrunner }} </md-option>
+        </md-select>
+      </md-list-item>
+
+      <md-divider></md-divider>
+
+      <h3 md-subheader>Libs</h3>
+
+      <md-list-item *ngFor="let lib of options.libs">
+        <h4 md-line>{{lib}}</h4>
+      </md-list-item>
+
+      <button md-button class="">add lib</button>
+      <md-divider></md-divider>
+    </md-list>
+
     <button md-button type="submit" class="project-form__submit">Save</button>
   </form>
   <p>Form value: {{ projectForm.value | json }}</p>
