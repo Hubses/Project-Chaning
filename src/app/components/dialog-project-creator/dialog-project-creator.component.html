@@ -1,13 +1,16 @@
-<div class="title">Dialog Title</div>
-<md-input-container>
-  <input [(ngModel)]='projectName' #ctrl='ngModel' mdInput minlength="1" placeholder="Write project name" required>
-  <md-error>
-    <span *ngIf="!ctrl.empty || !isValid">Empty</span>
-  </md-error>
-</md-input-container>
-<md-select placeholder="select framework">
-  <md-option *ngFor="let framework of frameworks" [value]="framework.value" (click)="setFramework(framework.viewValue)">
-    {{ framework.viewValue }}
-  </md-option>
-</md-select>
-<button md-raised-button (click)="createProject(projectName,framework)">Create</button>
+<div class="dialog-project-creator">
+  <div class="project-creator__title">Create a project</div>
+  <md-input-container class="project-creator__name-container">
+    <input class="name-container__name" [(ngModel)]='projectName' #ctrl='ngModel' mdInput minlength="1" placeholder="Write project name"
+      required>
+    <md-error class="name-container__error">
+      <span *ngIf="!ctrl.empty">enter project name</span>
+    </md-error>
+  </md-input-container>
+  <md-select class="project-creator__select" placeholder="select framework">
+    <md-option *ngFor="let framework of frameworks" [value]="framework" (click)="setFramework(framework)">
+      {{ framework }}
+    </md-option>
+  </md-select>
+  <button class="project-creator__button" md-raised-button (click)="createProject(projectName,framework)">Create</button>
+</div>

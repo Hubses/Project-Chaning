@@ -15,10 +15,10 @@ export class DialogProjectCreatorComponent {
   public framework: string;
 
   public frameworks = [
-    { value: 'empty-0', viewValue: 'empty' },
-    { value: 'angular2-1', viewValue: 'angular2' },
-    { value: 'react-2', viewValue: 'react' },
-    { value: 'jquery-3', viewValue: 'jquery' }
+    'empty',
+    'angular2',
+    'react',
+    'jquery'
   ];
 
   public constructor(
@@ -31,7 +31,7 @@ export class DialogProjectCreatorComponent {
 
   public createProject(projectName: string, framework: string): void {
     if (this.isValid) {
-      this.dialogRef.close({ name: projectName, framework });
+      this.dialogRef.close({ name: projectName, framework, options: { taskrunner: '', libs: '' } });
     }
   }
 

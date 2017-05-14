@@ -1,34 +1,25 @@
-.project {
+.project-list {
     padding: 10px;
     display: flex;
     flex-wrap: wrap;
     justify-content: flex-start;
 }
 
-.project-card {
+.project-list__card {
     width: 256px;
     padding: 10px;
     margin: 10px;
 }
 
-.example-fill-remaining-space {
+.rigth-space {
     flex: 1 1 auto;
 }
 
-.project-image.mat-card-image {
-    margin: 0;
-}
-
-.project-image {
+.card-image__container {
     width: 256px;
     height: 256px;
 }
-
-
-.project-image.mat-card-image:first-child {
-    width: 100%;
-    margin: 0
-}
-.mat-card>.mat-card-actions:last-child{
+.project-image.mat-card-image:first-child{
     margin: 0;
+    width: 100%;
 }

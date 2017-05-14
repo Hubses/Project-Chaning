@@ -1,13 +1,13 @@
-.example-fill-remaining-space {
+.rigth-space {
   flex: 1 1 auto;
 }
-.user-image{
+.user__image{
   border-radius: 50%;
 }
-.user-info{
+.topbar-user{
     display: flex;
     align-items: center;
 }
-.user-name{
+.user__name{
   margin: 10px;
 }

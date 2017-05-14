@@ -11,7 +11,7 @@ export class ProjectsListComponent {
   @Input() public projects: entities.IProject[];
 
   @Output() public onRemoveProject: EventEmitter<entities.IProject> = new EventEmitter();
-  @Output() public onViewDetail: EventEmitter<string> = new EventEmitter();
+  @Output() public onViewDetail: EventEmitter<entities.IProject> = new EventEmitter();
   @Output() public onGenerateProject: EventEmitter<entities.IProject> = new EventEmitter();
 
   public urls: entities.IDictionary = {
@@ -24,8 +24,8 @@ export class ProjectsListComponent {
     this.onRemoveProject.emit(project);
   }
 
-  public viewDetail(projectName: string): void {
-    this.onViewDetail.emit(projectName);
+  public viewDetail(project: entities.IProject): void {
+    this.onViewDetail.emit(project);
   }
 
   public generateProject(project: entities.IProject): void {

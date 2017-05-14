@@ -1,17 +1,17 @@
-<div class="project">
-  <md-card class="project-card" *ngFor="let project of projects">
-    <md-card-header>
-      <md-card-title>name: {{project.name}}</md-card-title>
-      <md-card-subtitle>framework: {{project.framework}}</md-card-subtitle>
-      <span class="example-fill-remaining-space"></span>
-      <button (click)="removeProject(project)" md-mini-fab><md-icon>close</md-icon></button>
+<div class="project-list">
+  <md-card class="project-list__card" *ngFor="let project of projects">
+    <md-card-header class="list-card__header">
+      <md-card-title class="card-header__title">name: {{project.name}}</md-card-title>
+      <md-card-subtitle class="card-header__subtitle">framework: {{project.framework}}</md-card-subtitle>
+      <span class="rigth-space"></span>
+      <button class="card-header__remove-button" (click)="removeProject(project)" md-mini-fab><md-icon>close</md-icon></button>
     </md-card-header>
-    <div class="project-image">
-      <img md-card-image class="project-image" src="{{urls[project.framework]}}">
+    <div class="card-image__container">
+      <img class="image-container__image" md-card-image class="project-image" src="{{urls[project.framework]}}">
     </div>
-    <md-card-actions>
-      <button md-button (click)="generateProject(project)">GENERATE</button>
-      <button md-button (click)="viewDetail(project.name)">VIEW DETAIL</button>
+    <md-card-actions class="card-action">
+      <button class="card-action__generate" md-button (click)="generateProject(project)">GENERATE</button>
+      <button class="card-action__detail" md-button (click)="viewDetail(project)">VIEW DETAIL</button>
     </md-card-actions>
   </md-card>
 </div>

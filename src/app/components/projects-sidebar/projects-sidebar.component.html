@@ -1,6 +1,6 @@
 <div class="projects-sidebar">
-  <button md-raised-button (click)="openDialog()"> New Project </button>
-  <div class="projects" *ngFor="let project of projects">
-    <button md-button (click)="openProject(project.name)">{{project.name}}</button>
+  <button class="projects-sidebar__button" md-raised-button (click)="openDialog()"> New Project </button>
+  <div class="projects-sidebar__projects-list" *ngFor="let project of projects">
+    <button class="sidebar-projects-list__button" md-button (click)="openProject(project.name)">{{project.name}}</button>
   </div>
 </div>
