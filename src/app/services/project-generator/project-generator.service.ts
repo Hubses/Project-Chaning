@@ -429,23 +429,17 @@ export class AppComponent implements OnInit {
 </head>
 <body>
     <h1>App Work</h1>
-    <script src="./jquery-3.2.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="./index.js"></script>
 </body>
 </html>`;
 
     let indexJs = ``;
-    let jquery321Min: string = ``; // http.get
-    this.http$.get('https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js').map((res) => {
-      let body = res.json();
-      return body.data || {};
-    })
 
     let styleCss = ``;
 
     this.generateFile('index', this.extentions.html, indexhtml);
     this.generateFile('style', this.extentions.css, styleCss);
-    this.generateFile('jquery-3.2.1.min.js', this.extentions.js, jquery321Min);
     this.generateFile('index', this.extentions.js, indexJs);
 
     this.jszip.generateAsync({ type: 'blob' }).then((data) => {
