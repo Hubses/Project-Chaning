@@ -1,0 +1,9 @@
+<md-toolbar class="topbar" color="primary">
+    <span class="topbar__title">Project-Chaining</span>
+    <span class="rigth-space"></span>
+    <span class="topbar-user" *ngIf="user">
+        <img class="user__image" width="30" src="{{user.photoUrl}}" />
+        <span class="user__name">{{user.name}}</span>
+    <button class="user__logout" md-button (click)="logout()"> LOGOUT </button>
+    </span>
+</md-toolbar>

@@ -1,0 +1,2 @@
+<projects-list class="projects-container__list" [projects]="projects$ | async" (onRemoveProject)="removeProject($event)"
+  (onGenerateProject)="generateProject($event)" (onViewDetail)="viewDetail($event)"></projects-list>

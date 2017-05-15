@@ -1,0 +1,7 @@
+.title{
+    font-family: 'Roboto Regular';
+    font-size: xx-large;
+}
+.mat-select-placeholder.mat-floating-placeholder {
+    width: 100% !important;
+}
