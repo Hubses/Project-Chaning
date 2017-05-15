@@ -24,7 +24,7 @@ export class ProjectsSidebarComponent {
 
     // dialogRef.componentInstance.projectsNames = this.projects.map(project => project.name);
 
-    this.frameworks = dialogRef.componentInstance.frameworks;
+    dialogRef.componentInstance.frameworks = this.frameworks;
 
     let closeDialogSunscription = dialogRef.afterClosed().subscribe(result => {
       this.onCreateProject.emit(result);

@@ -30,7 +30,10 @@ export class AppContainer implements OnInit {
     this.authService.logout();
   }
 
-  public viewDetail(project: entities.IProject) {
+  public viewDetail(project: entities.IProject): void {
     this.projectsService.getProject(this.authService.getState().uid, project.$key);
+  }
+  public createProject(project: entities.IProject): void {
+    this.projectsService.createProject(project);
   }
 }

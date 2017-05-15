@@ -12,25 +12,19 @@ export class DialogProjectCreatorComponent {
   @Input() public projectsNames: string[];
 
   public projectName: string;
-  public frameworks: string[] = [];
-  public selectedFramework: string;
+  public frameworks: string[];
+  public framework: string;
 
   public constructor(
     public dialogRef: MdDialogRef<DialogProjectCreatorComponent>
   ) { }
 
-  public get isValid(): boolean {
-    return !this.projectsNames.includes(this.projectName);
-  }
-
   public createProject(projectName: string, framework: string): void {
-    if (this.isValid) {
-      this.dialogRef.close({ name: projectName, framework, options: { taskrunner: '', libs: '' } });
-    }
+    this.dialogRef.close({ name: projectName, framework, options: { taskrunner: '', libs: [''] } });
   }
 
   public setFramework(framework: string): string {
-    this.selectedFramework = framework;
-    return this.selectedFramework;
+    this.framework = framework;
+    return this.framework;
   }
 }

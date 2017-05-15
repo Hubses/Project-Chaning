@@ -3,7 +3,8 @@
 
   <md-sidenav-container class="projects-container__sidenav-container">
     <md-sidenav class="sidenav-container__sidenav" #sidenav mode="side" opened="true">
-      <projects-sidebar class="sidenav__projects" [projects]="projects$ | async" [frameworks]="frameworks$ | async" (onViewDetailProject)="viewDetail($event)"></projects-sidebar>
+      <projects-sidebar class="sidenav__projects" [projects]="projects$ | async" [frameworks]="frameworks$ | async" (onViewDetailProject)="viewDetail($event)"
+        (onCreateProject)="createProject($event)"></projects-sidebar>
     </md-sidenav>
 
     <router-outlet></router-outlet>

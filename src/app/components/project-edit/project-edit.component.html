@@ -30,18 +30,6 @@
       </md-list-item>
 
       <md-divider></md-divider>
-
-      <!--<h3 md-subheader>Libs</h3>
-
-      <md-list-item *ngIf="libs">
-        <h4 md-line>{{lib}}</h4>
-        <md-select *ngIf="libs" class="project-options__taskRunner" formControlName="options.libs">
-          <md-option *ngFor="let lib of options.libs" [value]="lib"> {{ lib }} </md-option>
-        </md-select>
-      </md-list-item>
-
-      <button md-button class="" (click)="addLib()">add lib</button>
-      <md-divider></md-divider>-->
     </md-list>
 
     <button md-button type="submit" class="project-form__submit">Save</button>
@@ -49,3 +37,4 @@
   <p>Form value: {{ projectForm.value | json }}</p>
   <p>Form status: {{ projectForm.status | json }}</p>
 </div>
+<preloader *ngIf="!project"></preloader>

@@ -20,9 +20,6 @@ export class ProjectDetailComponent implements OnInit, OnDestroy {
   public taskrunners: string[];
 
   private projectSubscription: Subscription;
-  private frameworksSubscription: Subscription;
-  private libsSubscription: Subscription;
-  private taskrunnerSubscription: Subscription;
 
   constructor(
     private projectsService: ProjectsService,
@@ -47,9 +44,6 @@ export class ProjectDetailComponent implements OnInit, OnDestroy {
 
   public ngOnDestroy(): void {
     this.projectSubscription.unsubscribe();
-    this.frameworksSubscription.unsubscribe();
-    this.libsSubscription.unsubscribe();
-    this.taskrunnerSubscription.unsubscribe();
   }
 
   public updateProject(project: entities.IProject): void {

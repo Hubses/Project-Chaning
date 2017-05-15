@@ -45,11 +45,15 @@ export class ProjectsContainerComponent implements OnInit {
       duration: 3000
     });
     this.snackBarOpenedSubscribtion = snackbarRef.afterOpened().subscribe(() => {
-      if (project.framework.name === 'angular2') {
+      if (project.framework === 'angular2') {
         this.projectGeneratorService.generateAngular();
       }
-      if (project.framework.name === 'jquery') {
+      if (project.framework === 'jquery') {
         this.projectGeneratorService.generateJquery();
+      }
+
+      if (project.framework === 'react') {
+        this.projectGeneratorService.generateReact();
       }
 
       this.snackBarOpenedSubscribtion.unsubscribe();

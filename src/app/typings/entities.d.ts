@@ -8,8 +8,9 @@ declare namespace entities {
 
     interface IProject {
         name: string;
-        framework: IFramework;
-        options?: IOptions;
+        framework: string;
+        taskrunner: string;
+        options?: string[];
         $key?: string;
     }
 

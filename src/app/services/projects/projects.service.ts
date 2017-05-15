@@ -58,21 +58,12 @@ export class ProjectsService {
         let userId = this.authService.getState().uid;
         let newProject: entities.IProject;
 
-        if (project.options) {
-            newProject = {
-                framework: project.framework,
-                name: project.name,
-                options: {
-                    taskrunner: project.options.taskrunner,
-                    libs: project.options.libs
-                }
-            };
-        } else {
-            newProject = {
-                framework: project.framework,
-                name: project.name
-            };
+        newProject = {
+            name: project.name,
+            taskrunner: project.taskrunner,
+            framework: project.framework
         }
+
 
         this.af.database.object(`/projects/${userId}/${project.$key}/`).update(newProject);
     }

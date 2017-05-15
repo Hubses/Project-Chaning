@@ -37,10 +37,7 @@ export class ProjectEditComponent implements OnInit, OnChanges {
       name: formProject.name,
       framework: formProject.framework,
       $key: project.$key,
-      options: {
-        taskrunner: formProject.taskrunner,
-        libs: ['']
-      }
+      taskrunner: formProject.taskrunner,
     };
     this.onUpdateProject.emit(newProject);
   }
@@ -57,7 +54,7 @@ export class ProjectEditComponent implements OnInit, OnChanges {
     this.projectForm.patchValue({
       name: project.name,
       framework: project.framework,
-      taskrunner: project.options.taskrunner,
+      taskrunner: project.taskrunner,
       // options: {
       //   libs: this.options.libs
       // }
