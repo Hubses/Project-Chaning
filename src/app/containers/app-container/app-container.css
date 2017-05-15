@@ -1,0 +1,21 @@
+.projects-container {
+  height: 100%;
+}
+
+.projects-container__sidenav-container{
+  width: 100%;
+  height: calc(100% - 64px);
+}
+
+.sidenav-container__sidenav{
+  display: block;
+}
+
+.projects-container__list{
+  display: block;
+  height: 100%;
+} 
+
+.mat-sidenav-backdrop,div.mat-sidenav-content{
+  display: flex;
+} 

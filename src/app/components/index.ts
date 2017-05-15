@@ -4,3 +4,4 @@ export { DialogProjectCreatorComponent } from './dialog-project-creator/dialog-p
 export { ProjectsSidebarComponent } from './projects-sidebar/projects-sidebar.component'
 export * from './projects-list';
 export * from './project-edit/project-edit.component';
+export * from './preloader/preloader.component';

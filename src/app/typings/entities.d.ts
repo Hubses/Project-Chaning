@@ -8,18 +8,29 @@ declare namespace entities {
 
     interface IProject {
         name: string;
-        framework: string;
-        options: string[];
+        framework: IFramework;
+        options?: IOptions;
         $key?: string;
     }
 
     interface IDictionary {
         [propName: string]: string;
     }
-
     interface IOptions {
-        taskruner: string;
+        taskrunner: string;
         libs: string[];
+    }
+    interface ITaskRunner {
+        name: string;
+        $key?: string;
+    }
+    interface ILib {
+        name: string;
+        $key?: string;
+    }
+    interface IFramework {
+        name: string;
+        $key?: string;
     }
     interface IDictionaryExtention {
         [extention: string]: string;

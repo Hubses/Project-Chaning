@@ -59,7 +59,7 @@ import 'hammerjs';
 
 
 import 'firebase';
-import 'jszip';
+//import 'jszip';
 import 'file-saver';
 /***************************************************************************************************
  * APPLICATION IMPORTS

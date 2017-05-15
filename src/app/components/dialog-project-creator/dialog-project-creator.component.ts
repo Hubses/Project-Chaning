@@ -12,14 +12,8 @@ export class DialogProjectCreatorComponent {
   @Input() public projectsNames: string[];
 
   public projectName: string;
-  public framework: string;
-
-  public frameworks = [
-    'empty',
-    'angular2',
-    'react',
-    'jquery'
-  ];
+  public frameworks: string[] = [];
+  public selectedFramework: string;
 
   public constructor(
     public dialogRef: MdDialogRef<DialogProjectCreatorComponent>
@@ -36,7 +30,7 @@ export class DialogProjectCreatorComponent {
   }
 
   public setFramework(framework: string): string {
-    this.framework = framework;
-    return this.framework;
+    this.selectedFramework = framework;
+    return this.selectedFramework;
   }
 }

@@ -1,55 +1,42 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Observable, Subscription } from 'rxjs/Rx';
 
-import { ProjectStorageService, AuthService, ProjectsService, ProjectGeneratorService } from '../../services';
+import { ProjectsService, ProjectGeneratorService } from '../../services';
 import { Router } from '@angular/router';
 import { MdSnackBar } from '@angular/material';
-import { Observable } from 'rxjs/Observable';
-import { Subscription } from 'rxjs';
 
 @Component({
-  selector: 'app-default-container',
+  selector: 'app-projects-container',
   templateUrl: './projects-container.component.html',
-  styleUrls: ['./projects-container.component.css'],
-  encapsulation: ViewEncapsulation.None
+  styleUrls: ['./projects-container.component.css']
 })
 export class ProjectsContainerComponent implements OnInit {
+
+  public projects$: Observable<entities.IProject[]>;
+
+  @Output() public onViewDetailProject: EventEmitter<entities.IProject> = new EventEmitter();
 
   private snackBarOpenedSubscribtion: Subscription;
   private snackBarDississedSubscribtion: Subscription;
 
-  public user$: Observable<entities.IUser>;
-  public projects$: Observable<entities.IProject[]>;
-
-  public constructor(
-    private snackBar: MdSnackBar,
-    private projectStorageService: ProjectStorageService,
-    private authService: AuthService,
+  constructor(
     private projectsService: ProjectsService,
     private router: Router,
-    private projectGeneratorService: ProjectGeneratorService
+    private projectGeneratorService: ProjectGeneratorService,
+    private snackBar: MdSnackBar,
   ) { }
 
   public ngOnInit(): void {
-    this.user$ = this.authService.user$;
-    this.projects$ = this.user$.switchMap(user => this.projectsService.getProjects(user.id));
-  }
-
-  public logout(): void {
-    this.authService.logout();
-  }
-
-  public createProject(project: entities.IProject): void {
-    this.projectsService.createProject(project);
+    this.projects$ = this.projectsService.projects$;
   }
 
   public removeProject(project: entities.IProject): void {
     this.projectsService.removeProject(project);
   }
 
-  public viewDetail(projectName: string): entities.IProject {
-    const currentProject = this.projectStorageService.find(projectName);
-    this.router.navigate(['/project', currentProject.name]);
-    return currentProject;
+  public viewDetail(project: entities.IProject): void {
+    this.onViewDetailProject.emit(project);
+    this.router.navigate(['/projects', project.$key]);
   }
 
   public generateProject(project: entities.IProject): void {
@@ -58,10 +45,10 @@ export class ProjectsContainerComponent implements OnInit {
       duration: 3000
     });
     this.snackBarOpenedSubscribtion = snackbarRef.afterOpened().subscribe(() => {
-      if (project.framework === 'angular2') {
+      if (project.framework.name === 'angular2') {
         this.projectGeneratorService.generateAngular();
       }
-      if (project.framework === 'jquery') {
+      if (project.framework.name === 'jquery') {
         this.projectGeneratorService.generateJquery();
       }
 

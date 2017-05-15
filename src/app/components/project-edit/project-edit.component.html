@@ -1,4 +1,4 @@
-<div *ngIf="project" class="project-detail">
+<div class="project-detail">
   <button class="project-detail__return" md-button routerLink="/projects">return to projects</button>
   <form class="project-detail__form" [formGroup]="projectForm" novalidate (ngSubmit)="updateProject(project)">
     <md-list>
@@ -31,14 +31,17 @@
 
       <md-divider></md-divider>
 
-      <h3 md-subheader>Libs</h3>
+      <!--<h3 md-subheader>Libs</h3>
 
-      <md-list-item *ngFor="let lib of options.libs">
+      <md-list-item *ngIf="libs">
         <h4 md-line>{{lib}}</h4>
+        <md-select *ngIf="libs" class="project-options__taskRunner" formControlName="options.libs">
+          <md-option *ngFor="let lib of options.libs" [value]="lib"> {{ lib }} </md-option>
+        </md-select>
       </md-list-item>
 
-      <button md-button class="">add lib</button>
-      <md-divider></md-divider>
+      <button md-button class="" (click)="addLib()">add lib</button>
+      <md-divider></md-divider>-->
     </md-list>
 
     <button md-button type="submit" class="project-form__submit">Save</button>

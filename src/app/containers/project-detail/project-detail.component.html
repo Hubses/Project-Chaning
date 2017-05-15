@@ -1,10 +1,2 @@
-<div class="project-detail">
-  <button class="project-detail__return" md-button routerLink="/projects">return to projects</button>
-  <div class="project-detail-description description">
-    <div class="description-name">projectName: {{getName()}}</div>
-    <div class="description-framework">framework: {{getFramework()}}</div>
-    <div class="description-options" *ngFor="let option of options">
-
-    </div>
-  </div>
-</div>
+<project-edit *ngIf="project" [project]="project" [frameworks]="frameworks" [taskrunners]="taskrunners" [libs]="libs" (onUpdateProject)="updateProject($event)">
+</project-edit>

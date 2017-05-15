@@ -10,8 +10,9 @@ import { DialogProjectCreatorComponent } from 'app/components';
 export class ProjectsSidebarComponent {
 
   @Input() public projects: entities.IProject[];
+  @Input() public frameworks: string[];
 
-  @Output() public onOpenProject: EventEmitter<string> = new EventEmitter();
+  @Output() public onViewDetailProject: EventEmitter<entities.IProject> = new EventEmitter();
   @Output() public onCreateProject: EventEmitter<entities.IProject> = new EventEmitter();
 
   constructor(
@@ -21,7 +22,9 @@ export class ProjectsSidebarComponent {
   public openDialog(): void {
     let dialogRef = this.dialog.open(DialogProjectCreatorComponent);
 
-    dialogRef.componentInstance.projectsNames = this.projects.map(project => project.name);
+    // dialogRef.componentInstance.projectsNames = this.projects.map(project => project.name);
+
+    this.frameworks = dialogRef.componentInstance.frameworks;
 
     let closeDialogSunscription = dialogRef.afterClosed().subscribe(result => {
       this.onCreateProject.emit(result);
@@ -29,7 +32,8 @@ export class ProjectsSidebarComponent {
     });
   }
 
-  public openProject(projectName: string): void {
-    this.onOpenProject.emit(projectName);
+  public viewDetail(project: entities.IProject): void {
+    this.onViewDetailProject.emit(project);
   }
+
 }

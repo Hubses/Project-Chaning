@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, EventEmitter, Output, OnChanges, SimpleChanges } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 
 @Component({
   selector: 'project-edit',
@@ -11,31 +11,12 @@ export class ProjectEditComponent implements OnInit, OnChanges {
   public projectForm: FormGroup = this.fb.group({});
 
   @Input() public project: entities.IProject;
+  @Input() public frameworks: string[];
+  @Input() public taskrunners: string[];
+  @Input() public libs: string[];
 
   @Output() public onUpdateProject: EventEmitter<entities.IProject> = new EventEmitter();
 
-  public frameworks: string[] = [
-    'none',
-    'angular2',
-    'rect',
-    'jquery'
-  ];
-
-  public taskrunners: string[] = [
-    'gulp',
-    'webpack'
-  ];
-
-  public libs: string[] = [
-    'rxjs',
-    'd3.js',
-    'tree.js'
-  ];
-
-  private options: entities.IOptions = {
-    taskrunner: '',
-    libs: []
-  };
   public constructor(
     private fb: FormBuilder,
   ) { };
@@ -43,24 +24,22 @@ export class ProjectEditComponent implements OnInit, OnChanges {
   public ngOnInit(): void { };
 
   public ngOnChanges(changes: SimpleChanges): void {
-    if (this.project) {
-      if (!this.project.options) {
-        this.project.options = this.options;
-      }
+
+    if (this.project && this.libs && this.taskrunners && this.frameworks) {
+      console.log(this.project);
       this.createForm(this.project);
     }
   }
 
   public updateProject(project: entities.IProject): void {
     let formProject = this.projectForm.getRawValue();
-    let newProject = Object.assign({}, project);
-    newProject = {
+    let newProject = {
       name: formProject.name,
       framework: formProject.framework,
       $key: project.$key,
       options: {
         taskrunner: formProject.taskrunner,
-        libs: formProject.options.libs
+        libs: ['']
       }
     };
     this.onUpdateProject.emit(newProject);
@@ -71,17 +50,17 @@ export class ProjectEditComponent implements OnInit, OnChanges {
       name: ['', Validators.required],
       framework: ['', Validators.required],
       taskrunner: '',
-      libs: ['']
+      // libs: ['']
     });
 
     // fill data from source
     this.projectForm.patchValue({
       name: project.name,
       framework: project.framework,
-      taskrunner: this.options.taskrunner,
-      options: {
-        libs: this.options.libs
-      }
+      taskrunner: project.options.taskrunner,
+      // options: {
+      //   libs: this.options.libs
+      // }
     });
   }
 }

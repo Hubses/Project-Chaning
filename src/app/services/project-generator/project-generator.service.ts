@@ -22,23 +22,18 @@ export class ProjectGeneratorService {
     jpeg: 'jpeg',
     md: 'md',
     js: 'js'
-  }
+  };
 
   public constructor(
     private http$: Http
   ) { }
 
-  public generateFile(filename: string, extention: string | entities.IDictionaryExtention, data: string | File | Blob, folderName?: string): JSZip {
-    if (folderName) {
-      return this.jszip.file(`${folderName}/${filename}.${extention}`, data);
-      // return this.jszip.file(`${filename}.${extention}`, data).;
-    } else {
-      return this.jszip.file(`${filename}.${extention}`, data);
-    }
+  public generateFile(path: string, extention: string | entities.IDictionaryExtention, data: string | File | Blob): JSZip {
+    return this.jszip.file(`${path}.${extention}`, data);
   }
 
   public generateAngular(options?: string | entities.IOptions): void {
-    let debug1 = {
+    let packageJson = `{
       "name": "initial",
       "version": "0.0.0",
       "license": "MIT",
@@ -94,8 +89,8 @@ export class ProjectGeneratorService {
         "tslint": "~4.5.1",
         "typescript": "~2.2.2"
       }
-    }
-    let tsconfig = {
+    }`
+    let tsconfig = `{
       "compileOnSave": false,
       "compilerOptions": {
         "outDir": "./dist/out-tsc",
@@ -115,8 +110,8 @@ export class ProjectGeneratorService {
           "dom"
         ]
       }
-    }
-    let maints = `import { enableProdMode } from '@angular/core';
+    }`;
+    let mainTs = `import { enableProdMode } from '@angular/core';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 
 import { AppModule } from './app/app.module';
@@ -129,10 +124,80 @@ if (environment.production) {
 platformBrowserDynamic().bootstrapModule(AppModule);
 `;
 
+    let appModule =
+      `import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { HttpModule } from '@angular/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-    this.generateFile('package', this.extentions.json, JSON.stringify(debug1));
-    this.generateFile('tsconfig', this.extentions.json, JSON.stringify(tsconfig));
-    this.generateFile('main', this.extentions.ts, maints, 'app');
+import { AppComponent } from './app.component';
+
+@NgModule({
+  declarations: [
+    AppComponent,
+  ],
+  imports: [
+    BrowserModule,
+    FormsModule,
+    HttpModule,
+  ],
+  providers: [
+
+  ],
+  bootstrap: [AppComponent]
+})
+export class AppModule { }
+`;
+
+    let appComponentTs = `import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthService } from './services';
+
+import { Subscription } from 'rxjs';
+
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
+})
+export class AppComponent implements OnInit {
+
+  public constructor(
+
+  ) { }
+
+  public ngOnInit(): void {
+  }
+}`;
+    let indexHtml =
+      `<!doctype html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Initial</title>
+  <base href="/" target="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+</head>
+
+<body>
+  <app-root>Loading...</app-root>
+</body>
+
+</html>`;
+
+    let appComponentHtml = `<div>App work</div>`;
+
+
+    this.generateFile('package', this.extentions.json, packageJson);
+    this.generateFile('tsconfig', this.extentions.json, tsconfig);
+    this.generateFile('app/index', this.extentions.html, indexHtml);
+    this.generateFile('app/main', this.extentions.ts, mainTs);
+    this.generateFile('app/app.module', this.extentions.ts, appModule);
+    this.generateFile('app/app.component', this.extentions.ts, appComponentTs);
+    this.generateFile('app/app.component', this.extentions.html, appComponentHtml);
     this.jszip.generateAsync({ type: 'blob' }).then((data) => {
       fileSaver.saveAs(data, 'angular2-seed.zip');
     });

@@ -1,9 +1,2 @@
-<app-topbar [user]="user$ | async" (onLogout)="logout()"></app-topbar>
-
-<md-sidenav-container class="example-container">
-  <md-sidenav #sidenav mode="side" opened="true">
-    <projects-sidebar class="project-sidebar" [projects]="projects$ | async" (onCreateProject)="createProject($event)"></projects-sidebar>
-  </md-sidenav>
-
-  <projects-list class="project-list" [projects]="projects$ | async" (onRemoveProject)="removeProject($event)" (onGenerateProject)="generateProject($event)"></projects-list>
-</md-sidenav-container>
+<projects-list class="projects-container__list" [projects]="projects$ | async" (onRemoveProject)="removeProject($event)"
+  (onGenerateProject)="generateProject($event)" (onViewDetail)="viewDetail($event)"></projects-list>

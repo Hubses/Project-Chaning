@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule, Routes } from '@angular/router';
@@ -14,22 +14,23 @@ import {
 
   TopbarComponent,
   DialogProjectCreatorComponent,
-  CardProjectComponent,
   ProjectsSidebarComponent,
-  ProjectsListComponent
+  ProjectsListComponent,
+  ProjectEditComponent,
+  PreloaderComponent
 } from './components';
 
 import {
   ProjectDetailComponent,
-  ProjectsContainerComponent,
+  AppContainer,
   NotFoundComponent,
   LoginComponent,
+  ProjectsContainerComponent
 } from './containers';
 
 import {
   AuthService,
   ProjectsService,
-  ProjectStorageService,
   ProjectGeneratorService
 } from './services';
 
@@ -42,10 +43,19 @@ import {
 import { firebaseConfig } from './firebase.config';
 
 const routes: Routes = [
-  { path: '', component: AppComponent },
+
   { path: 'login', component: LoginComponent },
-  { path: 'projects', component: ProjectsContainerComponent },
-  { path: 'project/:name', component: ProjectDetailComponent },
+  {
+    path: 'projects', component: AppContainer, children: [
+      {
+        path: '',
+        component: ProjectsContainerComponent
+      }, {
+        path: ':name',
+        component: ProjectDetailComponent
+      }]
+  },
+  { path: '', component: AppComponent },
   { path: '**', component: NotFoundComponent }
 ];
 
@@ -57,15 +67,18 @@ const routes: Routes = [
     DialogProjectCreatorComponent,
     NotFoundComponent,
     ProjectDetailComponent,
-    ProjectsContainerComponent,
-    CardProjectComponent,
+    AppContainer,
     LoginComponent,
     ProjectsSidebarComponent,
     ProjectsListComponent,
+    ProjectEditComponent,
+    ProjectsContainerComponent,
+    PreloaderComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpModule,
     BrowserAnimationsModule,
     RouterModule.forRoot(routes),
@@ -79,7 +92,6 @@ const routes: Routes = [
   providers: [
     AuthService,
     ProjectsService,
-    ProjectStorageService,
     ProjectGeneratorService
   ],
   bootstrap: [AppComponent]

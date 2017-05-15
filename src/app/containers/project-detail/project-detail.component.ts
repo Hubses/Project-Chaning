@@ -1,37 +1,59 @@
-import { Component, OnInit, Input, EventEmitter } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
+import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
 
-import { ProjectStorageService } from '../../services';
-import { Observable } from 'rxjs/Observable';
+import { ProjectsService, AuthService } from '../../services';
+import { Subscription } from 'rxjs/Rx';
+import { OnDestroy } from 'angularfire2/node_modules/@angular/core';
 
 @Component({
   selector: 'app-project-detail',
   templateUrl: './project-detail.component.html',
   styleUrls: ['./project-detail.component.css']
 })
-export class ProjectDetailComponent implements OnInit {
+export class ProjectDetailComponent implements OnInit, OnDestroy {
 
-  public currentProject: entities.IProject;
-  public options: string[] | entities.IOptions[];
+
+  public project: entities.IProject;
+  public frameworks: string[];
+  public libs: string[];
+  public taskrunners: string[];
+
+  private projectSubscription: Subscription;
+  private frameworksSubscription: Subscription;
+  private libsSubscription: Subscription;
+  private taskrunnerSubscription: Subscription;
 
   constructor(
-    private projectStorageService: ProjectStorageService,
+    private projectsService: ProjectsService,
+    private authService: AuthService,
+    private fb: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
-  ) { }
-
-  ngOnInit() {
-    this.route.params
-      .switchMap((params: Params) => Observable.of(this.projectStorageService.find(params['name'])))
-      .subscribe((project: entities.IProject) => this.currentProject = project);
+  ) {
   }
 
-
-  public getFramework(): string {
-    return this.currentProject.framework;
+  public ngOnInit(): void {
+    this.projectSubscription = this.route.params
+      .switchMap((params: Params) => this.projectsService.getProject(this.authService.getState().uid, params['name']))
+      .combineLatest(this.projectsService.frameworks$, this.projectsService.libs$, this.projectsService.taskRunners$)
+      .subscribe(([project, frameworks, libs, taskrunners]) => {
+        this.project = project;
+        this.frameworks = frameworks;
+        this.libs = libs;
+        this.taskrunners = taskrunners;
+      });
   }
 
-  public getName(): string {
-    return this.currentProject.name;
+  public ngOnDestroy(): void {
+    this.projectSubscription.unsubscribe();
+    this.frameworksSubscription.unsubscribe();
+    this.libsSubscription.unsubscribe();
+    this.taskrunnerSubscription.unsubscribe();
+  }
+
+  public updateProject(project: entities.IProject): void {
+    this.projectsService.updateProject(project);
+    this.router.navigate(['projects']);
   }
 }
