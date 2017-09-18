@@ -11,6 +11,18 @@
         ".write": "$uid === auth.uid",
         ".read": "$uid === auth.uid"
       }
+    },
+    "frameworks": {
+      ".write": false,
+      ".read": true
+    },
+    "libs": {
+      ".write": false,
+      ".read": true
+    },
+    "taskrunner": {
+      ".write": false,
+      ".read": true
     }
   }
 }

@@ -1,10 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
-import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
 
 import { ProjectsService, AuthService } from '../../services';
 import { Subscription } from 'rxjs/Rx';
-import { OnDestroy } from 'angularfire2/node_modules/@angular/core';
 
 @Component({
   selector: 'app-project-detail',

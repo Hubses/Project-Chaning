@@ -18,6 +18,8 @@ export class ProjectsService {
         private af: AngularFire,
         private authService: AuthService
     ) {
+        type projectType = entities.IProject;
+
         this.projects$ = this.authService.user$.switchMap(user => this.getProjects(user.id));
         this.frameworks$ = this.getFrameworks();
         this.taskRunners$ = this.getTaskrunners();
