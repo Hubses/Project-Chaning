@@ -20,7 +20,13 @@ export class DialogProjectCreatorComponent {
   ) { }
 
   public createProject(projectName: string, framework: string): void {
-    this.dialogRef.close({ name: projectName, framework, options: { taskrunner: '', libs: [''] } });
+    let progect: entities.IProject ={
+      name: projectName,
+      framework: framework,
+      taskrunner: 'webpack',
+    };
+
+    this.dialogRef.close(progect);
   }
 
   public setFramework(framework: string): string {
