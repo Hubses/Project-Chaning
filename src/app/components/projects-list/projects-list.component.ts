@@ -14,9 +14,10 @@ export class ProjectsListComponent {
   @Output() public onGenerateProject: EventEmitter<entities.IProject> = new EventEmitter();
 
   public urls: entities.IDictionary = {
-    angular2: 'https://material.angularjs.org/latest/img/icons/angular-logo.svg',
-    react: 'https://react.parts/react-logo.svg',
-    jquery: 'http://www.css-tricks.ru/content/data/6/jquery-icon.png'
+    angular2: '../../../assets/angular-logo.svg ',
+    react: '../../../assets/react-logo.svg',
+    jquery: '../../../assets/jquery-icon.png',
+    none: '../../../assets/none-logo.png'
   };
 
   public removeProject(project: entities.IProject): void {
